@@ -12,7 +12,7 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
-    "precommit": "lint-staged"
+    "pre-commit": "next lint"
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.2-beta.4",
