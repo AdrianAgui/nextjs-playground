@@ -1,25 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import Button from 'components/Button';
 import { Container } from '@nextui-org/react';
-import Github from './Icons/Github';
-import { Avatar } from '@nextui-org/react';
-import { loginWithGithub, onAuthStateChanges } from '../firebase/client';
-import { useState, useEffect } from 'react';
-import { Text } from '@nextui-org/react';
+import LoginHeader from './LoginHeader';
 
 export default function Header() {
-  const [user, setUser] = useState(undefined);
-
-  useEffect(() => {
-    onAuthStateChanges(setUser);
-  }, []);
-
-  const handleClick = async () => {
-    const user = await loginWithGithub();
-    setUser(user);
-  };
-
   return (
     <Container as="header" className="py-8" display="flex" justify="space-between" alignItems="center" responsive>
       <Link href="/">
@@ -33,40 +17,7 @@ export default function Header() {
         </a>
       </Link>
 
-      <div className="flex items-center">
-        {user === null && (
-          <Button onClick={handleClick}>
-            <Github />
-            Login with Github
-          </Button>
-        )}
-
-        {user && user.avatar && (
-          <>
-            <div className="mr-3">
-              <Avatar src={user.avatar} size="lg" zoomed />
-            </div>
-            <div>
-              <Text size={20} weight={'bold'}>
-                {user.name}
-              </Text>
-            </div>
-          </>
-        )}
-
-        {user === undefined && (
-          <>
-            <div className="mr-3">
-              <Avatar src={null} size="lg" zoomed />
-            </div>
-            <div>
-              <Text size={20} weight={'bold'}>
-                Loading...
-              </Text>
-            </div>
-          </>
-        )}
-      </div>
+      <LoginHeader></LoginHeader>
     </Container>
   );
 }

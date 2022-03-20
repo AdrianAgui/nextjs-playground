@@ -2,7 +2,10 @@ import PageLayout from 'components/PageLayout';
 import Image from 'next/image';
 import { Text } from '@nextui-org/react';
 import Link from 'next/link';
-import serverName from 'utils/serverName';
+import { NUM_POKEMON } from 'utils/constants';
+import capitalize from 'utils/capitalize';
+
+const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
 export default function Pokemon({ idNum, name, front_default, prevId, nextId, hasPrev, hasNext }) {
   return (
@@ -41,21 +44,22 @@ export default function Pokemon({ idNum, name, front_default, prevId, nextId, ha
 }
 
 export async function getStaticPaths() {
-  const paramIds = Array.from({ length: 151 }, (_, i) => {
+  const paramIds = Array.from({ length: NUM_POKEMON }, (_, i) => {
     return { params: { id: String(i + 1) } };
   });
 
   return {
     paths: paramIds,
-    fallback: true
+    fallback: false
   };
 }
 
 export async function getStaticProps({ params }) {
   const { id } = params;
 
-  const response = await fetch(`${serverName()}/api/pokemon/detail/${id}`);
-  const pokemon = await response.json();
+  const response = await fetch(endpoint(id));
+  const pokemonObj = await response.json();
+  const pokemon = { ...pokemonObj, name: capitalize(pokemonObj.name) };
 
   const { name } = pokemon;
   const { front_default } = pokemon.sprites.other.dream_world;
@@ -70,6 +74,6 @@ function pagination(id) {
     prevId: +id - 1,
     nextId: +id + 1,
     hasPrev: +id - 1 > 0,
-    hasNext: +id + 1 <= 151
+    hasNext: +id + 1 <= NUM_POKEMON
   };
 }
