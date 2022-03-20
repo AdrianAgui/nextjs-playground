@@ -14,15 +14,16 @@ export default function Button({ children, onClick }) {
           font-size: 16px;
           font-weight: 600;
           padding: 8px 24px;
-          transition: opacity .3s ease;
+          opacity: 1;
+          transition: 0.3s ease;
+        }
+
+        button:hover {
+          opacity: 0.75;
         }
 
         button > :global(svg) {
           margin-right: 8px;
-        }
-
-        button:hover {
-          opacity .7;
         }
       `}</style>
     </>
