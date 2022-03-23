@@ -7,7 +7,6 @@ import { firebaseConfig } from './config';
 export const onAuthStateChanges = (onChange) => {
   const auth = getAuth();
   return onAuthStateChanged(auth, (user) => {
-    console.log(user);
     const normalizedUser = user ? mapUserFromFirebaseAuth(user) : user;
     onChange(normalizedUser);
   });

@@ -15,7 +15,7 @@ export default function Root({ pokemons }) {
 
 export async function getStaticProps() {
   const pokemonArray = Array.from({ length: NUM_POKEMON }, (_, i) => i + 1);
-  const pokemonsFetched = await Promise.all(pokemonArray().map((id) => fetch(endpoint(id))));
+  const pokemonsFetched = await Promise.all(pokemonArray.map((id) => fetch(endpoint(id))));
   const pokemonResponse = await Promise.all(pokemonsFetched.map((p) => p.json()));
   const pokemons = pokemonResponse.map((poke) => {
     return { ...poke, name: capitalize(poke.name) };

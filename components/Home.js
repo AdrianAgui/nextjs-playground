@@ -7,11 +7,11 @@ export default function Home({ pokemons }) {
   return (
     <>
       <Container>
-        <Card color="primary">
-          <Row justify="center" align="center">
-            <Text h6 size={15} color="white">
-              Pokedex app created by <b>Adrián Aguirre</b> with <b>NextJS</b> and <b>NextUI</b> whichs gives you the best developer experience with
-              all the features you need for building beautiful and modern websites and applications.
+        <Card color='primary'>
+          <Row justify='center' align='center'>
+            <Text h6 size={15} color='white'>
+              Pokedex Gen is an app created by <b>Adrián Aguirre</b> with <b>NextJS</b> and <b>NextUI</b> whichs gives you the best developer
+              experience with all the features you need for building beautiful and modern websites and applications.
             </Text>
           </Row>
         </Card>
@@ -29,8 +29,8 @@ export default function Home({ pokemons }) {
             return (
               <Link href={`/pokemon/${id}`} key={id}>
                 <a>
-                  <div className="flex justify-center items-center">
-                    <Image src={front_default} alt={`Image for ${name}`} width={96} height={96} layout="fixed"></Image>
+                  <div className='flex justify-center items-center'>
+                    <Image src={front_default} alt={`Image for ${name}`} width={96} height={96} layout='fixed'></Image>
                     <Text size={24}>{name}</Text>
                   </div>
                 </a>

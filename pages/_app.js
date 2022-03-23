@@ -4,7 +4,7 @@ import '../styles/globals.css';
 function MyApp({ Component, pageProps }) {
   return (
     <NextUIProvider>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </NextUIProvider>
   );
 }
