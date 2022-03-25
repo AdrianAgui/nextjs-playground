@@ -8,12 +8,7 @@ export default function Header() {
     <Container className='py-8' display='flex' justify='space-between' alignItems='center' responsive>
       <Link href='/'>
         <a>
-          <Image
-            src='https://fontmeme.com/permalink/220307/6ebe5c4201b070a3a0b1390fbba584ac.png'
-            alt='fuente-pokemon'
-            width={190}
-            height={70}
-          ></Image>
+          <Image src='https://fontmeme.com/permalink/220323/4adf4c238f1ea2bc99680b1460eaeac2.png' alt='logo-pokegen' width={256} height={75}></Image>
         </a>
       </Link>
 

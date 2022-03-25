@@ -29,7 +29,7 @@ export default function Home({ pokemons }) {
             return (
               <Link href={`/pokemon/${id}`} key={id}>
                 <a>
-                  <div className='flex justify-center items-center'>
+                  <div className='flex items-center'>
                     <Image src={front_default} alt={`Image for ${name}`} width={96} height={96} layout='fixed'></Image>
                     <Text size={24}>{name}</Text>
                   </div>
