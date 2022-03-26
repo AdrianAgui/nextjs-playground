@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Header from 'components/Header';
+import HeaderBar from 'components/Header/HeaderBar';
 
 export default function PageLayout({ children, title = 'Pokedex Gen', description = 'pokedex gen', keywords = 'pokedex, pokemon, nintendo' }) {
   return (
@@ -11,7 +11,7 @@ export default function PageLayout({ children, title = 'Pokedex Gen', descriptio
       </Head>
 
       <header>
-        <Header />
+        <HeaderBar />
       </header>
 
       <main>{children}</main>

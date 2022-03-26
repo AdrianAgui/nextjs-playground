@@ -1,8 +1,8 @@
-import Github from './Icons/Github';
-import Google from './Icons/Google';
+import Github from '../Icons/Github';
+import Google from '../Icons/Google';
 import { Avatar, Text, Button, Loading, Spacer } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
-import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from '../firebase/client';
+import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from '../../firebase/client';
 import { LOGIN_TYPE } from 'utils/constants';
 
 export default function LoginHeader() {
