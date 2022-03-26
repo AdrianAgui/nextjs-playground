@@ -4,8 +4,11 @@ import { Avatar, Text, Button, Loading, Spacer } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
 import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from '../../firebase/client';
 import { LOGIN_TYPE } from 'utils/constants';
+import { useAppContext } from 'context/Context';
 
 export default function LoginHeader() {
+  const { setUserData } = useAppContext();
+
   const [user, setUser] = useState(undefined);
   const [loadingLogin, setLoadingLogin] = useState(false);
   const [typeLogin, setTypeLogin] = useState(null);
@@ -23,6 +26,7 @@ export default function LoginHeader() {
         const user = userEvent.user ? userEvent.user : userEvent;
         const normalizedUser = mapUserFromFirebaseAuth(user);
         setUser(normalizedUser);
+        setUserData(normalizedUser);
         setLoadingLogin(false);
       })
       .catch((error) => {
@@ -32,8 +36,14 @@ export default function LoginHeader() {
   };
 
   const handleLogoutClick = () => {
+    setLoadingLogin(true);
+
     logout()
-      .then(() => setUser(null))
+      .then(() => {
+        setUser(null);
+        setUserData(null);
+        setLoadingLogin(false);
+      })
       .catch((error) => {
         console.error(error);
         setLoadingLogin(false);
