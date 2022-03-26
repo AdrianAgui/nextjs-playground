@@ -4,18 +4,17 @@ import { Avatar, Text, Button, Loading, Spacer } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
 import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from '../../firebase/client';
 import { LOGIN_TYPE } from 'utils/constants';
-import { useAppContext } from 'context/Context';
+import { useGlobalContext } from 'context/GlobalContext';
 
 export default function LoginHeader() {
-  const { setUserData } = useAppContext();
+  const { user, setUser } = useGlobalContext();
 
-  const [user, setUser] = useState(undefined);
   const [loadingLogin, setLoadingLogin] = useState(false);
   const [typeLogin, setTypeLogin] = useState(null);
 
   useEffect(() => {
     onAuthStateChanges(setUser);
-  }, []);
+  }, [setUser]);
 
   const handleLoginClick = (loginType) => {
     setLoadingLogin(true);
@@ -26,7 +25,6 @@ export default function LoginHeader() {
         const user = userEvent.user ? userEvent.user : userEvent;
         const normalizedUser = mapUserFromFirebaseAuth(user);
         setUser(normalizedUser);
-        setUserData(normalizedUser);
         setLoadingLogin(false);
       })
       .catch((error) => {
@@ -41,7 +39,6 @@ export default function LoginHeader() {
     logout()
       .then(() => {
         setUser(null);
-        setUserData(null);
         setLoadingLogin(false);
       })
       .catch((error) => {
@@ -87,6 +84,7 @@ export default function LoginHeader() {
           )}
         </>
       )}
+
       {user && (
         <>
           <div className='mr-3'>
