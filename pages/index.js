@@ -1,6 +1,7 @@
 import PageLayout from 'components/PageLayout';
 import Home from 'components/Home';
 import { search } from 'services/algolia-search';
+import { TOTAL_SEARCH } from 'utils/constants';
 
 export default function Root({ pokemons }) {
   return (
@@ -10,11 +11,7 @@ export default function Root({ pokemons }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const { query } = context;
-  const { q = '' } = query;
-
-  const { results } = await search(q);
-
-  return { props: { query: query, pokemons: results } };
+export async function getStaticProps() {
+  const { results } = await search('', TOTAL_SEARCH, true);
+  return { props: { pokemons: results } };
 }
