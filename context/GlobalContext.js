@@ -5,9 +5,7 @@ export const GlobalContext = createContext(null);
 export const GlobalContextProvider = ({ children }) => {
   const [user, setUser] = useState(false);
 
-  useEffect(() => {
-    console.log('global use effect', user);
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   const values = useMemo(
     () => ({
