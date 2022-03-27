@@ -16,7 +16,7 @@ export default function Searcher() {
   };
 
   const onFocus = () => setShowAutocomplete(true);
-  const onBlur = () => setShowAutocomplete(false);
+  const onBlur = () => setTimeout(() => setShowAutocomplete(false), 150);
 
   return (
     <div className='searcher'>
