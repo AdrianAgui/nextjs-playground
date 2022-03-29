@@ -6,16 +6,18 @@ import Searcher from 'components/Header/Searcher';
 
 export default function HeaderBar() {
   return (
-    <Container className='py-8' display='flex' justify='space-between' alignItems='center' responsive>
-      <Link href='/'>
-        <a>
-          <Image src='/logo.png' alt='logo-pokegen' width={256} height={75}></Image>
-        </a>
-      </Link>
+    <header>
+      <Container className='py-8' display='flex' justify='space-between' alignItems='center' responsive>
+        <Link href='/'>
+          <a>
+            <Image src='/logo.png' alt='logo-pokegen' width={256} height={75}></Image>
+          </a>
+        </Link>
 
-      <Searcher />
+        <Searcher />
 
-      <LoginHeader></LoginHeader>
-    </Container>
+        <LoginHeader></LoginHeader>
+      </Container>
+    </header>
   );
 }

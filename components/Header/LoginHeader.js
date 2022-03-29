@@ -53,10 +53,10 @@ export default function LoginHeader() {
         <>
           {!loadingLogin && (
             <div className='flex flex-col'>
-              <Button padding={32} className='bg-slate-100' shadow onClick={() => handleLoginClick(LOGIN_TYPE.GOOGLE)}>
+              <Button padding={32} className='bg-slate-100 w-auto' shadow onClick={() => handleLoginClick(LOGIN_TYPE.GOOGLE)}>
                 <div className='flex items-center'>
                   <Google className='mr-1' />
-                  <span className='text-black'>Login with Google</span>
+                  <span className='text-black hidden lg:block'>Login with Google</span>
                 </div>
               </Button>
 
@@ -65,7 +65,7 @@ export default function LoginHeader() {
               <Button padding={32} className='bg-slate-900' shadow onClick={() => handleLoginClick(LOGIN_TYPE.GITHUB)}>
                 <div className='flex items-center'>
                   <Github className='mr-1' />
-                  <span>Login with Github</span>
+                  <span className='hidden lg:block'>Login with Github</span>
                 </div>
               </Button>
             </div>

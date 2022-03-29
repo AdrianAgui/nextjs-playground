@@ -3,6 +3,7 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 
   max-width: 85%;
+  min-height: 100vh;
   height: 100%;
   margin: 0 auto;
   margin-top: 1rem;
