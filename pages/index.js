@@ -1,7 +1,9 @@
 import PageLayout from 'components/PageLayout';
 import Home from 'components/Home';
-import { search } from 'services/algolia-search';
-import { TOTAL_SEARCH } from 'utils/constants';
+import { NUM_POKEMON } from 'utils/constants';
+import capitalize from 'utils/capitalize';
+
+const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon-form/${id}`;
 
 export default function Root({ pokemons }) {
   return (
@@ -12,6 +14,11 @@ export default function Root({ pokemons }) {
 }
 
 export async function getStaticProps() {
-  const { results } = await search('', TOTAL_SEARCH, true);
-  return { props: { pokemons: results } };
+  const pokemonArray = Array.from({ length: NUM_POKEMON }, (_, i) => i + 1);
+  const pokemonsFetched = await Promise.all(pokemonArray.map((id) => fetch(endpoint(id))));
+  const pokemonResponse = await Promise.all(pokemonsFetched.map((p) => p.json()));
+  const pokemons = pokemonResponse.map((poke) => {
+    return { ...poke, name: capitalize(poke.name) };
+  });
+  return { props: { pokemons } };
 }
