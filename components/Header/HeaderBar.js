@@ -1,23 +1,26 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Container } from '@nextui-org/react';
 import LoginHeader from 'components/Header/LoginHeader';
 import Searcher from 'components/Header/Searcher';
 
 export default function HeaderBar() {
   return (
-    <header>
-      <Container className='py-8' display='flex' justify='space-between' alignItems='center' responsive>
+    <>
+      <div className='flex flex-col min-h-[175px] md:flex-row items-center justify-between p-8'>
         <Link href='/'>
           <a>
             <Image src='/logo.png' alt='logo-pokegen' width={256} height={75}></Image>
           </a>
         </Link>
 
-        <Searcher />
+        <div className='mt-8 md:mt-0'>
+          <Searcher />
+        </div>
 
-        <LoginHeader></LoginHeader>
-      </Container>
-    </header>
+        <div className='mt-8 md:mt-0'>
+          <LoginHeader></LoginHeader>
+        </div>
+      </div>
+    </>
   );
 }

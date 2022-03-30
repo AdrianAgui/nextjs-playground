@@ -1,7 +1,9 @@
 import PageLayout from 'components/PageLayout';
+
 import Image from 'next/image';
-import { Text } from '@nextui-org/react';
 import Link from 'next/link';
+import { Text } from '@chakra-ui/react';
+
 import { NUM_POKEMON } from 'utils/constants';
 import capitalize from 'utils/capitalize';
 
@@ -10,18 +12,18 @@ const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 export default function Pokemon({ idNum, name, front_default, prevId, nextId, hasPrev, hasNext }) {
   return (
     <PageLayout title={idNum + ' ' + name}>
-      <div className="m-3 sm:m-0">
-        <section className="max-w-md m-auto">
-          <Text h1 size={40} weight="bold" className="text-center">
+      <div className='m-3 sm:m-0'>
+        <section className='max-w-md m-auto'>
+          <Text fontSize='40px' align='center'>
             {name}
           </Text>
 
-          <div className="flex justify-center my-8 mx-3 sm:mx-10">
-            <Image src={front_default} alt={`Image for ${name}`} width={360} height={260} layout="fixed"></Image>
+          <div className='flex justify-center my-8 mx-3 sm:mx-10'>
+            <Image src={front_default} alt={`Image for ${name}`} width={360} height={260} layout='fixed'></Image>
           </div>
 
-          <div className="flex justify-between font-bold">
-            <span className="flex justify-start">
+          <div className='flex justify-between font-bold'>
+            <span className='flex justify-start'>
               {hasPrev && (
                 <Link href={`/pokemon/${prevId}`}>
                   <a>⏮️ Previous</a>
@@ -29,7 +31,7 @@ export default function Pokemon({ idNum, name, front_default, prevId, nextId, ha
               )}
             </span>
 
-            <span className="flex justify-end ">
+            <span className='flex justify-end '>
               {hasNext && (
                 <Link href={`/pokemon/${nextId}`}>
                   <a>Next ⏭️</a>

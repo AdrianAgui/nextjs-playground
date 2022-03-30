@@ -3,7 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["eslint:recommended", "next", "plugin:react/recommended", "prettier"],
+  "extends": ["eslint:recommended", "next", "prettier"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -11,7 +11,7 @@
     "ecmaVersion": 6,
     "sourceType": "module"
   },
-  "plugins": ["react", "only-warn"],
+  "plugins": ["only-warn"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off"

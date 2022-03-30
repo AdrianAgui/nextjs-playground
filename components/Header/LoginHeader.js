@@ -1,10 +1,10 @@
 import Github from '../Icons/Github';
 import Google from '../Icons/Google';
-import { Avatar, Text, Button, Loading, Spacer } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
 import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from '../../firebase/client';
 import { LOGIN_TYPE } from 'utils/constants';
 import { useGlobalContext } from 'context/GlobalContext';
+import { Avatar, Button, Spinner, Text } from '@chakra-ui/react';
 
 export default function LoginHeader() {
   const { user, setUser } = useGlobalContext();
@@ -51,46 +51,45 @@ export default function LoginHeader() {
     <div className='flex items-center'>
       {user === null && (
         <>
-          {!loadingLogin && (
-            <div className='flex flex-col'>
-              <Button padding={32} className='bg-slate-100 w-auto' shadow onClick={() => handleLoginClick(LOGIN_TYPE.GOOGLE)}>
-                <div className='flex items-center'>
-                  <Google className='mr-1' />
-                  <span className='text-black hidden lg:block'>Login with Google</span>
-                </div>
-              </Button>
-
-              <Spacer y={0.5} />
-
-              <Button padding={32} className='bg-slate-900' shadow onClick={() => handleLoginClick(LOGIN_TYPE.GITHUB)}>
-                <div className='flex items-center'>
-                  <Github className='mr-1' />
-                  <span className='hidden lg:block'>Login with Github</span>
-                </div>
-              </Button>
-            </div>
-          )}
-
-          {loadingLogin && typeLogin === LOGIN_TYPE.GOOGLE && (
-            <Button clickable={false} padding={32} className='bg-slate-100' shadow>
-              <Loading color='white' size='sm' />
+          <div className='flex flex-col'>
+            <Button
+              as='button'
+              className='mb-3'
+              size='lg'
+              bg='#E2E8F0'
+              _hover={{ bg: '#E2E8F0aa' }}
+              isLoading={loadingLogin && typeLogin === LOGIN_TYPE.GOOGLE}
+              spinner={<Spinner color='black' size='md' />}
+              onClick={() => handleLoginClick(LOGIN_TYPE.GOOGLE)}
+            >
+              <div className='flex items-center'>
+                <Google className='mr-1' />
+                <span className='text-gray-800 text-sm hidden lg:block'>Login with Google</span>
+              </div>
             </Button>
-          )}
 
-          {loadingLogin && typeLogin === LOGIN_TYPE.GITHUB && (
-            <Button clickable={false} padding={32} className='bg-slate-900' shadow>
-              <Loading color='white' size='sm' />
+            <Button
+              as='button'
+              size='lg'
+              bg='#0F172A'
+              _hover={{ bg: '#0F172Add' }}
+              isLoading={loadingLogin && typeLogin === LOGIN_TYPE.GITHUB}
+              spinner={<Spinner color='white' size='md' />}
+              onClick={() => handleLoginClick(LOGIN_TYPE.GITHUB)}
+            >
+              <div className='flex items-center'>
+                <Github className='mr-1' />
+                <span className='text-white text-sm hidden lg:block'>Login with Github</span>
+              </div>
             </Button>
-          )}
+          </div>
         </>
       )}
 
       {user && (
         <>
-          <div className='mr-3'>
-            <Avatar src={user.avatar} size='lg' zoomed />
-          </div>
-          <Text size={20} weight={'bold'}>
+          <Avatar src={user.avatar} size='md' />
+          <Text as='span' className='ml-3 font-semibold' fontSize='20px'>
             {user.name}
           </Text>
           <button className='ml-3 text-lg' onClick={handleLogoutClick}>

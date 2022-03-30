@@ -1,7 +1,7 @@
 import css from '../styles/PokemonsTable.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Text } from '@nextui-org/react';
+import { Text } from '@chakra-ui/react';
 
 export default function Home({ pokemons }) {
   return (
@@ -20,7 +20,7 @@ export default function Home({ pokemons }) {
               <a>
                 <div className='flex items-center'>
                   <Image src={front_default} alt={`Image for ${name}`} width={96} height={96} layout='fixed'></Image>
-                  <Text size={24}>{name}</Text>
+                  <Text fontSize='xl'>{name}</Text>
                 </div>
               </a>
             </Link>

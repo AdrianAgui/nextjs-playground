@@ -11,9 +11,16 @@ export default function PageLayout({ children, title = 'Pokedex Gen', descriptio
         <meta name='keywords' content={keywords} />
       </Head>
 
-      <HeaderBar />
-      <main>{children}</main>
-      <LazyFooter />
+      <div className='content-container'>
+        <header>
+          <HeaderBar />
+        </header>
+        <main>{children}</main>
+      </div>
+
+      <footer className='footer--pin'>
+        <LazyFooter />
+      </footer>
     </>
   );
 }

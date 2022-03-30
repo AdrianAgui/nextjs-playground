@@ -21,7 +21,7 @@ export default function Searcher() {
   return (
     <div className='searcher'>
       <input
-        className='px-5 py-3 text-md border border-gray-400 rounded-3xl'
+        className='px-5 py-3 text-md border border-gray-400 rounded-3xl outline-0'
         type='search'
         ref={searchRef}
         onChange={handleChange}

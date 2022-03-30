@@ -14,5 +14,5 @@ function Footer() {
 export default function LazyFooter() {
   const { isNearScreen, fromRef } = useNearScreen();
 
-  return <footer ref={fromRef}>{isNearScreen ? <Footer /> : null}</footer>;
+  return <div ref={fromRef}>{isNearScreen ? <Footer /> : null}</div>;
 }
