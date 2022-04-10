@@ -1,6 +1,4 @@
-import useNearScreen from 'hooks/isNearScreen';
-
-function Footer() {
+export default function Footer() {
   return (
     <div className='flex justify-center w-100 p-8 bg-white font-semibold'>
       Created by Adrián Aguirre with&nbsp;
@@ -9,10 +7,4 @@ function Footer() {
       </a>
     </div>
   );
-}
-
-export default function LazyFooter() {
-  const { isNearScreen, fromRef } = useNearScreen();
-
-  return <div ref={fromRef}>{isNearScreen ? <Footer /> : null}</div>;
 }

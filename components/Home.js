@@ -1,9 +1,18 @@
-import PokemonsTable from 'components/PokemonsTable';
+import PokemonGrid from 'components/Grid/PokemonGrid';
+import { useState, useEffect } from 'react';
 import { useGlobalContext } from 'context/GlobalContext';
 import { Container, Box, Text } from '@chakra-ui/react';
+import { getApiPokemons } from 'services/GetPokemons';
+import { NUM_POKEMON_BY_PAGE } from './../utils/constants';
 
-export default function Home({ pokemons }) {
+export default function Home() {
   const { user } = useGlobalContext();
+  const [pokemons, setPokemons] = useState([]);
+
+  useEffect(() => {
+    setPokemons(new Array(NUM_POKEMON_BY_PAGE).fill(null));
+    getApiPokemons(0, NUM_POKEMON_BY_PAGE).then(setPokemons);
+  }, []);
 
   return (
     <>
@@ -15,7 +24,7 @@ export default function Home({ pokemons }) {
         </Box>
       </Container>
 
-      <PokemonsTable pokemons={pokemons} />
+      <PokemonGrid pokemons={pokemons} />
     </>
   );
 }
