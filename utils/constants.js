@@ -1,5 +1,6 @@
-export const NUM_POKEMON = 151;
-export const NUM_POKEMON_BY_PAGE = 30;
+export const TOTAL_POKEMON = 898;
+export const LIMIT = 30;
+export const INITIAL_PAGE = 1;
 export const LIMIT_SEARCH = 6;
 
 export const LOGIN_TYPE = {

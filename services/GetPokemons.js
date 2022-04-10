@@ -1,10 +1,10 @@
-import { NUM_POKEMON } from 'utils/constants';
+import { TOTAL_POKEMON } from 'utils/constants';
 import capitalize from 'utils/capitalize';
 import sleeper from 'utils/sleeper';
 
 const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon-form/${id}`;
 
-export async function getApiPokemons(offset = 0, limit = NUM_POKEMON) {
+export async function getApiPokemons(offset = 0, limit = TOTAL_POKEMON) {
   const pokemonArray = Array.from({ length: limit }, (_, i) => offset + i + 1);
   const pokemonsFetched = await Promise.all(pokemonArray.map((id) => fetch(endpoint(id))));
   const pokemons = await Promise.all(pokemonsFetched.map((p) => p.json()));

@@ -1,18 +1,26 @@
-import PokemonGrid from 'components/Grid/PokemonGrid';
 import { useState, useEffect } from 'react';
-import { useGlobalContext } from 'context/GlobalContext';
 import { Container, Box, Text } from '@chakra-ui/react';
+
+import PokemonGrid from 'components/Grid/PokemonGrid';
+import Pagination from './Grid/Pagination';
+
+import { useGlobalContext } from 'context/GlobalContext';
 import { getApiPokemons } from 'services/GetPokemons';
-import { NUM_POKEMON_BY_PAGE } from './../utils/constants';
+import { LIMIT, INITIAL_PAGE } from './../utils/constants';
 
 export default function Home() {
   const { user } = useGlobalContext();
   const [pokemons, setPokemons] = useState([]);
+  const [page, setPage] = useState(INITIAL_PAGE);
 
   useEffect(() => {
-    setPokemons(new Array(NUM_POKEMON_BY_PAGE).fill(null));
-    getApiPokemons(0, NUM_POKEMON_BY_PAGE).then(setPokemons);
+    setPokemons(new Array(LIMIT).fill(null));
+    getApiPokemons(0, LIMIT).then(setPokemons);
   }, []);
+
+  useEffect(() => {
+    getApiPokemons((page - 1) * LIMIT, LIMIT).then(setPokemons);
+  }, [page]);
 
   return (
     <>
@@ -25,6 +33,8 @@ export default function Home() {
       </Container>
 
       <PokemonGrid pokemons={pokemons} />
+
+      <Pagination page={page} setPage={setPage} />
     </>
   );
 }

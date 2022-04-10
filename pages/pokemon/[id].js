@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Text } from '@chakra-ui/react';
 
-import { NUM_POKEMON } from 'utils/constants';
+import { TOTAL_POKEMON } from 'utils/constants';
 import capitalize from 'utils/capitalize';
 
 const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -46,7 +46,7 @@ export default function Pokemon({ idNum, name, front_default, prevId, nextId, ha
 }
 
 export async function getStaticPaths() {
-  const paramIds = Array.from({ length: NUM_POKEMON }, (_, i) => {
+  const paramIds = Array.from({ length: TOTAL_POKEMON }, (_, i) => {
     return { params: { id: String(i + 1) } };
   });
 
@@ -63,9 +63,15 @@ export async function getStaticProps({ params }) {
   const pokemonObj = await response.json();
   const pokemon = { ...pokemonObj, name: capitalize(pokemonObj.name) };
 
+  console.log(pokemon.sprites);
+
   const { name } = pokemon;
-  const { front_default } = pokemon.sprites.other.dream_world;
   const { idNum, prevId, nextId, hasPrev, hasNext } = pagination(id);
+
+  let { front_default } = pokemon.sprites.other.dream_world;
+  if (!front_default) {
+    ({ front_default } = pokemon.sprites.other['official-artwork']);
+  }
 
   return { props: { idNum, name, front_default, prevId, nextId, hasPrev, hasNext } };
 }
@@ -76,6 +82,6 @@ function pagination(id) {
     prevId: +id - 1,
     nextId: +id + 1,
     hasPrev: +id - 1 > 0,
-    hasNext: +id + 1 <= NUM_POKEMON
+    hasNext: +id + 1 <= TOTAL_POKEMON
   };
 }

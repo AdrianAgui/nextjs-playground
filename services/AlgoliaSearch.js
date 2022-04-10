@@ -1,7 +1,7 @@
 import algoliasearch from 'algoliasearch/lite';
 
 const client = algoliasearch('1RKVX9BEPV', 'cf4e982fae5d7c6c5971acb245c2def1');
-const index = client.initIndex('pokedex-gen-1');
+const index = client.initIndex('pokedex-gen');
 
 const CACHE = {};
 
