@@ -63,8 +63,6 @@ export async function getStaticProps({ params }) {
   const pokemonObj = await response.json();
   const pokemon = { ...pokemonObj, name: capitalize(pokemonObj.name) };
 
-  console.log(pokemon.sprites);
-
   const { name } = pokemon;
   const { idNum, prevId, nextId, hasPrev, hasNext } = pagination(id);
 

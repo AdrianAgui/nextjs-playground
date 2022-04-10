@@ -15,7 +15,7 @@ export default function Pagination({ page, setPage }) {
         Prev
       </Button>
 
-      <span className='mx-7 text-3xl font-bold'>{page}</span>
+      <span className='mx-7 text-2xl font-bold'>{page}</span>
 
       <Button onClick={handleNextPage} disabled={page === 50}>
         Next

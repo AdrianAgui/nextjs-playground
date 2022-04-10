@@ -14,7 +14,7 @@ export default function PokemonItem({ pokemon }) {
     return (
       <Link href={`/pokemon/${id}`} key={id}>
         <a>
-          <div className='flex items-center'>
+          <div className='flex justify-center items-center'>
             <Image src={front_default} alt={`Image for ${name}`} width={96} height={96} layout='fixed'></Image>
             <Text fontSize='xl'>{name}</Text>
           </div>

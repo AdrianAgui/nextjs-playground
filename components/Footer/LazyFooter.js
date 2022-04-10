@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import useNearScreen from 'hooks/isNearScreen';
+import useNearScreen from 'hooks/useNearScreen';
 
 const Footer = lazy(() => import('./Footer'));
 
