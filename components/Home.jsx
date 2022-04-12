@@ -1,4 +1,4 @@
-import { Container, Box, Text } from '@chakra-ui/react';
+import { Container, Box, Text, Spinner } from '@chakra-ui/react';
 import { useEffect, useRef, useCallback } from 'react';
 
 import PokemonGrid from 'components/Grid/PokemonGrid';
@@ -11,14 +11,14 @@ import debounce from 'just-debounce-it';
 export default function Home() {
   const { user } = useGlobalContext();
 
-  const { loading, pokemons } = useGridPokemons();
+  const { loading, pokemons, setPage } = useGridPokemons();
 
   const externalRef = useRef();
-  const { isNearScreen } = useNearScreen({ ref: loading ? null : externalRef, once: false });
+  const { isNearScreen } = useNearScreen({ distance: '300px', ref: externalRef, once: false });
 
   const debounceHandleNextPage = useCallback(
-    debounce(() => console.log('next page'), 1000),
-    []
+    debounce(() => setPage((prevPage) => prevPage + 1), 300),
+    [setPage]
   );
 
   useEffect(() => {
@@ -36,6 +36,12 @@ export default function Home() {
       </Container>
 
       <PokemonGrid pokemons={pokemons} />
+
+      {loading && (
+        <div className='w-max py-5 my-0 mx-auto'>
+          <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' size='xl' />
+        </div>
+      )}
 
       <div id='visor' ref={externalRef}></div>
     </>

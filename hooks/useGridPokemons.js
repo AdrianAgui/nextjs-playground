@@ -5,6 +5,7 @@ import { getApiPokemons } from 'services/GetPokemons';
 export default function useGridPokemons() {
   const [loading, setLoading] = useState(false);
   const [pokemons, setPokemons] = useState([]);
+  const [page, setPage] = useState(INITIAL_PAGE);
 
   useEffect(() => {
     setLoading(true);
@@ -18,5 +19,15 @@ export default function useGridPokemons() {
       .catch((err) => console.error(err));
   }, []);
 
-  return { loading, pokemons };
+  useEffect(() => {
+    if (page === INITIAL_PAGE) return;
+
+    setLoading(true);
+    getApiPokemons(LIMIT * (page - 1), LIMIT).then((nextPokes) => {
+      setPokemons((prevPokes) => prevPokes.concat(nextPokes));
+      setLoading(false);
+    });
+  }, [page]);
+
+  return { loading, pokemons, setPage };
 }
