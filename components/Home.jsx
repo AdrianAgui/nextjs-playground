@@ -1,5 +1,5 @@
 import { Container, Box, Text } from '@chakra-ui/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
 import PokemonGrid from 'components/Grid/PokemonGrid';
 import useGridPokemons from 'hooks/useGridPokemons';
@@ -13,16 +13,17 @@ export default function Home() {
 
   const { loading, pokemons } = useGridPokemons();
 
-  const ref = useRef();
-  const { isNearScreen } = useNearScreen({ distance: '500px', ref: loading ? null : ref, once: false });
+  const externalRef = useRef();
+  const { isNearScreen } = useNearScreen({ ref: loading ? null : externalRef, once: false });
 
-  const handleNextPage = () => console.log('next page');
-  const debounceHandleNextPage = useRef();
-  debounceHandleNextPage.current = debounce(handleNextPage, 1000);
+  const debounceHandleNextPage = useCallback(
+    debounce(() => console.log('next page'), 1000),
+    []
+  );
 
   useEffect(() => {
-    if (isNearScreen) debounceHandleNextPage.current();
-  });
+    if (isNearScreen) debounceHandleNextPage();
+  }, [debounceHandleNextPage, isNearScreen]);
 
   return (
     <>
@@ -36,7 +37,7 @@ export default function Home() {
 
       <PokemonGrid pokemons={pokemons} />
 
-      <div id='visor' ref={ref}></div>
+      <div id='visor' ref={externalRef}></div>
     </>
   );
 }
