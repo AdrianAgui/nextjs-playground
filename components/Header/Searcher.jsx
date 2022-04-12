@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { LIMIT_SEARCH } from './../../utils/constants';
+import { LIMIT_SEARCH } from '../../utils/constants';
 import Autocomplete from 'components/Header/Autocomplete';
 
 export default function Searcher() {

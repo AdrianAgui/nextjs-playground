@@ -1,26 +1,28 @@
-import { useState, useEffect } from 'react';
 import { Container, Box, Text } from '@chakra-ui/react';
+import { useEffect, useRef } from 'react';
 
 import PokemonGrid from 'components/Grid/PokemonGrid';
-import Pagination from './Grid/Pagination';
+import useGridPokemons from 'hooks/useGridPokemons';
 
 import { useGlobalContext } from 'context/GlobalContext';
-import { getApiPokemons } from 'services/GetPokemons';
-import { LIMIT, INITIAL_PAGE } from './../utils/constants';
+import useNearScreen from './../hooks/useNearScreen';
+import debounce from 'just-debounce-it';
 
 export default function Home() {
   const { user } = useGlobalContext();
-  const [pokemons, setPokemons] = useState([]);
-  const [page, setPage] = useState(INITIAL_PAGE);
+
+  const { loading, pokemons } = useGridPokemons();
+
+  const ref = useRef();
+  const { isNearScreen } = useNearScreen({ distance: '500px', ref: loading ? null : ref, once: false });
+
+  const handleNextPage = () => console.log('next page');
+  const debounceHandleNextPage = useRef();
+  debounceHandleNextPage.current = debounce(handleNextPage, 1000);
 
   useEffect(() => {
-    setPokemons(new Array(LIMIT).fill(null));
-    getApiPokemons(0, LIMIT).then(setPokemons);
-  }, []);
-
-  useEffect(() => {
-    getApiPokemons((page - 1) * LIMIT, LIMIT).then(setPokemons);
-  }, [page]);
+    if (isNearScreen) debounceHandleNextPage.current();
+  });
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function Home() {
 
       <PokemonGrid pokemons={pokemons} />
 
-      <Pagination page={page} setPage={setPage} />
+      <div id='visor' ref={ref}></div>
     </>
   );
 }

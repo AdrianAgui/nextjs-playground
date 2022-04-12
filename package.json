@@ -19,6 +19,7 @@
     "algoliasearch": "4.13.0",
     "firebase": "9.6.9",
     "framer-motion": "^6",
+    "just-debounce-it": "^3.0.1",
     "next": "^12.1.4",
     "react": "^18.0.0",
     "react-content-loader": "^6.2.0",
