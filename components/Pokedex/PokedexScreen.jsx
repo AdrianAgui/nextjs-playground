@@ -1,0 +1,36 @@
+import css from 'styles/Pokedex.module.css';
+
+import Image from 'next/image';
+import Stat from './Stat';
+
+export default function PokedexScreen({ pokemon, loading, error }) {
+  if (error) {
+    return (
+      <div className={css['pokedex-screen']}>
+        <Image src='/404.png' width={360} height={260} alt='Error buscando tu pokemon' className={css['pokedex-no-screen']}></Image>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {loading ? (
+        <Image
+          src='https://media.giphy.com/media/kwuWA0j4Rvo2FHfvug/giphy.gif'
+          width={360}
+          height={260}
+          alt='Cargando...'
+          className={css['pokedex-no-screen']}
+        ></Image>
+      ) : (
+        <div className={css['pokedex-screen']}>
+          <div className={css['pokemon-info']}>
+            <h2 className={css['pokemon-name']}>{pokemon.name}</h2>
+            <img className={css['pokemon-img']} src={pokemon.sprites.front_default} alt={pokemon.name} />
+            <ul className={css['pokemon-stats']}>{pokemon && pokemon.stats.map((item) => <Stat key={item.stat.name} item={item} />)}</ul>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

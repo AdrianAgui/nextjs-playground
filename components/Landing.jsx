@@ -1,6 +1,8 @@
 import { Container, Box, Text } from '@chakra-ui/react';
 import { useGlobalContext } from 'context/GlobalContext';
 
+import Pokedex from './Pokedex/Pokedex';
+
 export default function Landing() {
   const { user } = useGlobalContext();
 
@@ -13,6 +15,8 @@ export default function Landing() {
           </Text>
         </Box>
       </Container>
+
+      <Pokedex />
     </>
   );
 }
