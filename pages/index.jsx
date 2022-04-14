@@ -1,10 +1,10 @@
 import PageLayout from 'components/PageLayout';
-import Home from 'components/Home';
+import Landing from 'components/Landing';
 
 export default function Root() {
   return (
     <PageLayout>
-      <Home />
+      <Landing />
     </PageLayout>
   );
 }
