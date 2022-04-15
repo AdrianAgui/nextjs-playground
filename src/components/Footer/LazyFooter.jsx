@@ -1,10 +1,13 @@
-import { lazy } from 'react';
-import useNearScreen from 'src/hooks/useNearScreen';
+import dynamic from 'next/dynamic';
 
-const Footer = lazy(() => import('./Footer'));
+const Footer = dynamic(() => import('./Footer'), {
+  suspense: false
+});
 
 export default function LazyFooter() {
-  const { isNearScreen, fromRef } = useNearScreen();
-
-  return <div ref={fromRef}>{isNearScreen ? <Footer /> : null}</div>;
+  return (
+    <div>
+      <Footer />
+    </div>
+  );
 }
