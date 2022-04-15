@@ -1,4 +1,4 @@
-import { search } from 'services/AlgoliaSearch';
+import { search } from 'src/services/AlgoliaSearch';
 
 export default async function handler(req, res) {
   const {

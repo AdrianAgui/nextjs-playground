@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { LIMIT, INITIAL_PAGE } from 'utils/constants';
-import { getApiPokemons } from 'services/GetPokemons';
+import { LIMIT, INITIAL_PAGE } from 'src/utils/constants';
+import { getApiPokemons } from 'src/services/GetPokemons';
 
 export default function useGridPokemons() {
   const [loading, setLoading] = useState(false);

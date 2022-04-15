@@ -1,5 +1,5 @@
 import { Container, Box, Text } from '@chakra-ui/react';
-import { useGlobalContext } from 'context/GlobalContext';
+import { useGlobalContext } from 'src/context/GlobalContext';
 
 import Pokedex from './Pokedex/Pokedex';
 

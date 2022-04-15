@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import HeaderBar from 'components/Header/HeaderBar';
+import HeaderBar from 'src/components/Header/HeaderBar';
 import LazyFooter from './Footer/LazyFooter';
 
 export default function PageLayout({ children, title = 'Pokedex Gen', description = 'pokedex gen', keywords = 'pokedex, pokemon, nintendo' }) {

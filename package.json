@@ -10,7 +10,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest --config ./config/jest.config.js"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.8.7",
@@ -27,7 +28,10 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "12.1.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.0.1",
     "autoprefixer": "10.4.4",
+    "babel-jest": "^27.5.1",
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
     "eslint-config-prettier": "8.5.0",
@@ -36,6 +40,8 @@
     "eslint-plugin-only-warn": "1.0.3",
     "eslint-plugin-react": "7.29.3",
     "eslint-plugin-react-hooks": "4.3.0",
+    "jest": "^27.5.1",
+    "jest-css-modules": "^2.1.0",
     "postcss": "8.4.12",
     "prettier": "2.5.1",
     "tailwindcss": "3.0.23"

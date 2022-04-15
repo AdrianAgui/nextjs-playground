@@ -1,11 +1,11 @@
-import PageLayout from 'components/PageLayout';
+import PageLayout from 'src/components/PageLayout';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { Text } from '@chakra-ui/react';
 
-import { TOTAL_POKEMON } from 'utils/constants';
-import capitalize from 'utils/capitalize';
+import { TOTAL_POKEMON } from 'src/utils/constants';
+import capitalize from 'src/utils/capitalize';
 
 const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 

@@ -1,6 +1,6 @@
-import { TOTAL_POKEMON } from 'utils/constants';
-import capitalize from 'utils/capitalize';
-import sleeper from 'utils/sleeper';
+import { TOTAL_POKEMON } from 'src/utils/constants';
+import capitalize from 'src/utils/capitalize';
+import sleeper from 'src/utils/sleeper';
 
 const endpoint1 = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 const endpoint2 = (id) => `https://pokeapi.co/api/v2/pokemon-form/${id}`;

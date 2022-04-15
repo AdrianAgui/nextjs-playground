@@ -2,8 +2,8 @@ import Github from '../Icons/Github';
 import Google from '../Icons/Google';
 import { useState, useEffect } from 'react';
 import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from '../../firebase/client';
-import { LOGIN_TYPE } from 'utils/constants';
-import { useGlobalContext } from 'context/GlobalContext';
+import { LOGIN_TYPE } from 'src/utils/constants';
+import { useGlobalContext } from 'src/context/GlobalContext';
 import { Avatar, Button, Spinner, Text } from '@chakra-ui/react';
 
 export default function LoginHeader() {

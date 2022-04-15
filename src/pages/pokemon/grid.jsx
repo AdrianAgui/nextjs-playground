@@ -1,10 +1,10 @@
 import { Spinner } from '@chakra-ui/react';
 import { useEffect, useRef, useCallback } from 'react';
 
-import PageLayout from 'components/PageLayout';
-import PokemonGrid from 'components/Grid/PokemonGrid';
-import useGridPokemons from 'hooks/useGridPokemons';
-import useNearScreen from 'hooks/useNearScreen';
+import PageLayout from 'src/components/PageLayout';
+import PokemonGrid from 'src/components/Grid/PokemonGrid';
+import useGridPokemons from 'src/hooks/useGridPokemons';
+import useNearScreen from 'src/hooks/useNearScreen';
 
 import debounce from 'just-debounce-it';
 

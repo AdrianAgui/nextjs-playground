@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import LoginHeader from 'components/Header/LoginHeader';
-import Searcher from 'components/Header/Searcher';
+import LoginHeader from 'src/components/Header/LoginHeader';
+import Searcher from 'src/components/Header/Searcher';
 
 export default function HeaderBar() {
   return (

@@ -1,5 +1,5 @@
-import PageLayout from 'components/PageLayout';
-import Landing from 'components/Landing';
+import PageLayout from 'src/components/PageLayout';
+import Landing from 'src/components/Landing';
 
 export default function Root() {
   return (
