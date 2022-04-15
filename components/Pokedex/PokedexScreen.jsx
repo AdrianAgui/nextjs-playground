@@ -19,7 +19,7 @@ export default function PokedexScreen({ pokemon, loading, error }) {
           src='https://media.giphy.com/media/kwuWA0j4Rvo2FHfvug/giphy.gif'
           width={360}
           height={260}
-          alt='Cargando...'
+          alt='Loading...'
           className={css['pokedex-no-screen']}
         ></Image>
       ) : (

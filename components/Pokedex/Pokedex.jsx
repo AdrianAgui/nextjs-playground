@@ -16,41 +16,46 @@ export default function Pokedex() {
   const [pokemonId, setPokemonId] = useState(randomId);
 
   useEffect(() => {
+    setLoading(true);
     getApiPokemon(pokemonId)
       .then((pokeData) => {
         console.log(pokeData);
         setPokemon(pokeData);
         setLoading(false);
+        setError(false);
       })
       .catch((err) => {
-        setError(true);
         console.error(err);
+        setLoading(false);
+        setError(true);
       });
-  }, []);
+  }, [pokemonId]);
 
   return (
-    <div className={css.pokedex}>
-      <div className={css['pokedex-left']}>
-        <div className={css['pokedex-left-top']}>
-          <div className={`${css['light']} ${css['is-sky']} ${css['is-big']}`} />
-          <div className={`${css['light']} ${css['is-red']}`} />
-          <div className={`${css['light']} ${css['is-yellow']}`} />
-          <div className={`${css['light']} ${css['is-green']}`} />
-        </div>
-        <div className={css['pokedex-screen-container']}>
-          <PokedexScreen pokemon={pokemon} loading={loading} error={error} />
-        </div>
-        <div className={css['pokedex-left-bottom']}>
-          <div className={css['pokedex-left-lights']}>
-            <div className={`${css['light']} ${css['is-blue']} ${css['is-medium']}`} />
-            <div className={`${css['light']} ${css['is-green']} ${css['is-large']}`} />
-            <div className={`${css['light']} ${css['is-orange']} ${css['is-large']}`} />
+    <div className={css['pokedex-container']}>
+      <div className={css['pokedex']}>
+        <div className={css['pokedex-left']}>
+          <div className={css['pokedex-left-top']}>
+            <div className={`${css['light']} ${css['is-sky']} ${css['is-big']}`} />
+            <div className={`${css['light']} ${css['is-red']}`} />
+            <div className={`${css['light']} ${css['is-yellow']}`} />
+            <div className={`${css['light']} ${css['is-green']}`} />
           </div>
-          <PokedexForm />
+          <div className={css['pokedex-screen-container']}>
+            <PokedexScreen pokemon={pokemon} loading={loading} error={error} />
+          </div>
+          <div className={css['pokedex-left-bottom']}>
+            <div className={css['pokedex-left-lights']}>
+              <div className={`${css['light']} ${css['is-blue']} ${css['is-medium']}`} />
+              <div className={`${css['light']} ${css['is-green']} ${css['is-large']}`} />
+              <div className={`${css['light']} ${css['is-orange']} ${css['is-large']}`} />
+            </div>
+            <PokedexForm pokemonId={pokemonId} setPokemonId={setPokemonId} setLoading={setLoading} />
+          </div>
         </div>
+        <div className={css['pokedex-right-front']} />
+        <div className={css['pokedex-right-back']} />
       </div>
-      <div className={css['pokedex-right-front']} />
-      <div className={css['pokedex-right-back']} />
     </div>
   );
 }
