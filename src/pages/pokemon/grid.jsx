@@ -9,10 +9,10 @@ import useNearScreen from 'src/hooks/useNearScreen';
 import debounce from 'just-debounce-it';
 
 export default function Home() {
-  const { loading, pokemons, setPage } = useGridPokemons();
+  const { loading, pokemons, page, setPage } = useGridPokemons();
 
   const externalRef = useRef();
-  const { isNearScreen } = useNearScreen({ distance: '300px', ref: externalRef, once: false });
+  const { isNearScreen } = useNearScreen({ ref: externalRef, once: false });
 
   const debounceHandleNextPage = useCallback(
     debounce(() => setPage((prevPage) => prevPage + 1), 300),
@@ -20,8 +20,8 @@ export default function Home() {
   );
 
   useEffect(() => {
-    if (isNearScreen) debounceHandleNextPage();
-  }, [debounceHandleNextPage, isNearScreen]);
+    if (page && isNearScreen) debounceHandleNextPage();
+  }, [isNearScreen]);
 
   return (
     <PageLayout>

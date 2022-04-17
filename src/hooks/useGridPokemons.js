@@ -29,5 +29,5 @@ export default function useGridPokemons() {
     });
   }, [page]);
 
-  return { loading, pokemons, setPage };
+  return { loading, pokemons, page, setPage };
 }

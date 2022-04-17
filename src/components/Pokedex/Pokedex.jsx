@@ -19,7 +19,6 @@ export default function Pokedex() {
     setLoading(true);
     getApiPokemon(pokemonId)
       .then((pokeData) => {
-        console.log(pokeData);
         setPokemon(pokeData);
         setLoading(false);
         setError(false);

@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
+
 import LoginHeader from 'src/components/Header/LoginHeader';
 import Searcher from 'src/components/Header/Searcher';
+import TypeSelector from './TypeSelector';
 
 export default function HeaderBar() {
   return (
@@ -13,8 +15,9 @@ export default function HeaderBar() {
           </a>
         </Link>
 
-        <div className='mt-8 md:mt-0'>
+        <div className='flex items-center mt-8 md:mt-0'>
           <Searcher />
+          <TypeSelector />
         </div>
 
         <div className='mt-8 md:mt-0'>
