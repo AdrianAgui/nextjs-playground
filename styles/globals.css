@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @import './variables.css';
-@import 'semantic-ui-css/semantic.min.css';
 
 html,
 body {
