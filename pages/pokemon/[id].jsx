@@ -2,27 +2,27 @@ import PageLayout from 'src/components/PageLayout';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Text } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 
 import { TOTAL_POKEMON } from 'src/utils/constants';
 import capitalize from 'src/utils/capitalize';
 
 const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
-export default function Pokemon({ idNum, name, front_default, prevId, nextId, hasPrev, hasNext }) {
+export default function PokeDetailPage({ idNum, name, front_default, prevId, nextId, hasPrev, hasNext }) {
   return (
     <PageLayout title={idNum + ' ' + name}>
       <div className='m-3 sm:m-0'>
         <section className='max-w-md m-auto'>
-          <Text fontSize='40px' align='center'>
+          <Heading fontSize='40px' align='center'>
             {name}
-          </Text>
+          </Heading>
 
           <div className='flex justify-center my-8 mx-3 sm:mx-10'>
             <Image src={front_default} alt={`Image for ${name}`} width={360} height={260} layout='fixed'></Image>
           </div>
 
-          <div className='flex justify-between font-bold'>
+          <div className='flex justify-between font-bold w-50 mx-auto'>
             <span className='flex justify-start'>
               {hasPrev && (
                 <Link href={`/pokemon/${prevId}`}>

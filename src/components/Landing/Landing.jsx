@@ -1,7 +1,11 @@
 import { Container, Box, Text } from '@chakra-ui/react';
 import { useGlobalContext } from 'src/context/GlobalContext';
 
-import Pokedex from './Pokedex/Pokedex';
+import css from 'styles/Landing.module.scss';
+
+import PokedexLink from './PokedexLink';
+import PokeGridLink from './PokeGridLink';
+import MyTeam from './MyTeam/MyTeam';
 
 export default function Landing() {
   const { user } = useGlobalContext();
@@ -16,7 +20,19 @@ export default function Landing() {
         </Box>
       </Container>
 
-      <Pokedex />
+      <section className={css.wrapper}>
+        <article className={css.myteam}>
+          <MyTeam />
+        </article>
+
+        <article className={css.pokedex}>
+          <PokedexLink />
+        </article>
+
+        <article className={css.pokegrid}>
+          <PokeGridLink />
+        </article>
+      </section>
     </>
   );
 }

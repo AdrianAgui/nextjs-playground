@@ -8,7 +8,7 @@ import useNearScreen from 'src/hooks/useNearScreen';
 
 import debounce from 'just-debounce-it';
 
-export default function Home() {
+export default function PokeGridPage() {
   const { loading, pokemons, page, setPage } = useGridPokemons();
 
   const externalRef = useRef();
