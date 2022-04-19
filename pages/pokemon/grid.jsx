@@ -24,7 +24,7 @@ export default function PokeGridPage() {
   }, [isNearScreen]);
 
   return (
-    <PageLayout>
+    <PageLayout title={`PokeGrid`}>
       <PokemonGrid pokemons={pokemons} />
 
       {loading && (

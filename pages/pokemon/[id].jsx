@@ -11,7 +11,7 @@ const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
 export default function PokeDetailPage({ idNum, name, front_default, prevId, nextId, hasPrev, hasNext }) {
   return (
-    <PageLayout title={idNum + ' ' + name}>
+    <PageLayout title={`${idNum} ${name}`}>
       <div className='m-3 sm:m-0'>
         <section className='max-w-md m-auto'>
           <Heading fontSize='40px' align='center'>

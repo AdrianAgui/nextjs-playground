@@ -1,6 +1,5 @@
 .myteam {
   grid-area: myteam;
-  min-height: 150px;
 }
 .pokegrid {
   grid-area: pokegrid;
@@ -35,5 +34,10 @@
 
   @media (max-width: 767px) {
     width: 90%;
+    grid-template-columns: 100%;
+    grid-template-areas:
+      'myteam'
+      'pokegrid'
+      'pokedex';
   }
 }
