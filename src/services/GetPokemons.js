@@ -18,7 +18,7 @@ export async function getApiPokemons(offset = 0, limit = LIMIT) {
   const pokemonArray = Array.from({ length: limit }, (_, i) => offset + i + 1);
   const pokemonsFetched = await Promise.all(pokemonArray.map((id) => fetch(endpoint2(id))));
   const pokemons = await Promise.all(pokemonsFetched.map((p) => p.json()));
-  await sleeper(1000);
+  await sleeper(500);
   return pokemons.map((poke) => {
     return { ...poke, name: capitalize(poke.name) };
   });
