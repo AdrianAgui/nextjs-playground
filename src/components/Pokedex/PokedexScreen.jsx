@@ -1,4 +1,4 @@
-import css from 'styles/Pokedex.module.css';
+import css from 'styles/Pokedex.module.scss';
 
 import Image from 'next/image';
 import Stat from './Stat';

@@ -18,7 +18,7 @@ export default function PageLayout({ children, title = 'Pokedex Gen', descriptio
         <main>{children}</main>
       </div>
 
-      <footer className='footer--pin'>
+      <footer className='footer-pin'>
         <LazyFooter />
       </footer>
     </>

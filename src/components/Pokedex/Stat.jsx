@@ -1,4 +1,4 @@
-import css from 'styles/Pokedex.module.css';
+import css from 'styles/Pokedex.module.scss';
 
 export default function Stat({ item }) {
   return (

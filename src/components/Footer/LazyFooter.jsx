@@ -5,9 +5,5 @@ const Footer = dynamic(() => import('./Footer'), {
 });
 
 export default function LazyFooter() {
-  return (
-    <div>
-      <Footer />
-    </div>
-  );
+  return <Footer />;
 }

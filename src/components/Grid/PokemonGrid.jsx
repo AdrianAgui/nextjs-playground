@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import PokemonItem from './PokemonItem';
 import PokemonSkeleton from './PokemonSkeleton';
 
-import css from 'styles/PokemonGrid.module.css';
+import css from 'styles/PokemonGrid.module.scss';
 
 export default function PokemonGrid({ pokemons }) {
   const [dataLoaded, setDataLoaded] = useState(false);
