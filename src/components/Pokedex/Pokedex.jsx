@@ -6,14 +6,19 @@ import { getApiPokemon } from 'src/services/GetPokemons';
 
 import { useState, useEffect } from 'react';
 import { TOTAL_POKEMON } from 'src/utils/constants';
+import randomPokemon from './../../utils/randomPokemon';
 
 export default function Pokedex() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [pokemon, setPokemon] = useState(null);
 
-  const randomId = Math.floor(Math.random() * TOTAL_POKEMON);
+  const randomId = randomPokemon();
   const [pokemonId, setPokemonId] = useState(randomId);
+
+  const handleRandomPokemon = () => {
+    setPokemonId(Math.floor(Math.random() * TOTAL_POKEMON));
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -44,16 +49,18 @@ export default function Pokedex() {
             <PokedexScreen pokemon={pokemon} loading={loading} error={error} />
           </div>
           <div className={css['pokedex-left-bottom']}>
-            <div className={css['pokedex-left-lights']}>
-              <div className={`${css['light']} ${css['is-blue']} ${css['is-medium']}`} />
-              <div className={`${css['light']} ${css['is-green']} ${css['is-large']}`} />
-              <div className={`${css['light']} ${css['is-orange']} ${css['is-large']}`} />
+            <div className={`flex ${css['pokedex-left-lights']}`}>
+              <input type='button' className={`${css['pokemon-btn']} text-3xl font-bold`} value='?' onClick={handleRandomPokemon} />
+              <div className='flex flex-col ml-3'>
+                <div className={`mb-1 ${css['light']} ${css['is-green']} ${css['is-large']}`} />
+                <div className={`${css['light']} ${css['is-orange']} ${css['is-large']}`} />
+              </div>
             </div>
             <PokedexForm pokemonId={pokemonId} setPokemonId={setPokemonId} setLoading={setLoading} />
           </div>
         </div>
-        <div className={css['pokedex-right-front']} />
-        <div className={css['pokedex-right-back']} />
+        {/* <div className={css['pokedex-right-front']} />
+        <div className={css['pokedex-right-back']} /> */}
       </div>
     </div>
   );
