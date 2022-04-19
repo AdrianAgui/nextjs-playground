@@ -12,7 +12,6 @@ export default function useGridPokemons() {
   const [page, setPage] = useState(INITIAL_PAGE);
 
   useEffect(() => {
-    console.log('getApiPokemons');
     setLoading(true);
     setPokemons(new Array(LIMIT).fill(null));
 
@@ -25,8 +24,6 @@ export default function useGridPokemons() {
   }, []);
 
   useEffect(() => {
-    console.log('getApiPokemons paged');
-
     if (page === INITIAL_PAGE || pokeType) return;
 
     setLoading(true);
