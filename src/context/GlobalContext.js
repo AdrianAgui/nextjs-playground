@@ -4,15 +4,18 @@ export const GlobalContext = createContext(null);
 
 export const GlobalContextProvider = ({ children }) => {
   const [user, setUser] = useState(false);
+  const [pokeType, setPokeType] = useState('');
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {}, [user, pokeType]);
 
   const values = useMemo(
     () => ({
       user,
-      setUser
+      setUser,
+      pokeType,
+      setPokeType
     }),
-    [user]
+    [user, pokeType]
   );
 
   return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;

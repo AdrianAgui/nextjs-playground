@@ -5,17 +5,14 @@ import PokemonSkeleton from './PokemonSkeleton';
 
 export default function PokemonItem({ pokemon }) {
   if (pokemon) {
-    const {
-      id,
-      name,
-      sprites: { front_default }
-    } = pokemon;
+    const { id, name } = pokemon;
+    let pathImage = pokemon.sprites?.front_default;
 
     return (
       <Link href={`/pokemon/${id}`} key={id}>
         <a>
           <div className='flex justify-center items-center'>
-            <Image src={front_default} alt={`Image for ${name}`} width={96} height={96} layout='fixed'></Image>
+            <Image src={pathImage} alt={`Image for ${name}`} width={96} height={96} layout='fixed'></Image>
             <Text fontSize='xl'>{name}</Text>
           </div>
         </a>

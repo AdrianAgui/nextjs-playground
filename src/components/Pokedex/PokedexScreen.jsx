@@ -26,7 +26,7 @@ export default function PokedexScreen({ pokemon, loading, error }) {
         <div className={css['pokedex-screen']}>
           <div className={css['pokemon-info']}>
             <h2 className={css['pokemon-name']}>{pokemon.name}</h2>
-            <img className={css['pokemon-img']} src={pokemon.sprites.front_default} alt={pokemon.name} />
+            <img src={pokemon.sprites.front_default} alt={pokemon.name} className={css['pokedex-img']}></img>
             <ul className={css['pokemon-stats']}>{pokemon && pokemon.stats.map((item) => <Stat key={item.stat.name} item={item} />)}</ul>
           </div>
         </div>
