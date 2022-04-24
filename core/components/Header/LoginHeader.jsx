@@ -1,7 +1,7 @@
 import Github from '../Icons/Github';
 import Google from '../Icons/Google';
 import { useState, useEffect, memo } from 'react';
-import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from '../../firebase/client';
+import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from 'core/firebase/auth';
 import { LOGIN_TYPE } from 'core/utils/constants';
 import { useGlobalContext } from 'core/context/GlobalContext';
 import { Avatar, Button, Spinner, Text } from '@chakra-ui/react';
@@ -13,7 +13,7 @@ function LoginHeader() {
   const [typeLogin, setTypeLogin] = useState(null);
 
   useEffect(() => {
-    onAuthStateChanges(setUser);
+    onAuthStateChanges().then(setUser);
   }, [setUser]);
 
   const handleLoginClick = (loginType) => {
