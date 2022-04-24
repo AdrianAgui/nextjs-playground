@@ -1,4 +1,4 @@
-import { GlobalContextProvider } from 'src/context/GlobalContext';
+import { GlobalContextProvider } from 'core/context/GlobalContext';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import 'styles/globals.scss';

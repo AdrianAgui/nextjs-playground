@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { LIMIT, INITIAL_PAGE } from 'src/utils/constants';
-import { getApiPokemons } from 'src/services/GetPokemons';
-import { useGlobalContext } from './../context/GlobalContext';
-import { getApiPokemonType } from 'src/services/GetPokemons';
+import { LIMIT, INITIAL_PAGE } from 'core/utils/constants';
+import { getApiPokemons } from 'core/services/GetPokemons';
+import { useGlobalContext } from '../context/GlobalContext';
+import { getApiPokemonType } from 'core/services/GetPokemons';
 
 export default function useGridPokemons() {
   const { pokeType } = useGlobalContext();

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import LoginHeader from 'src/components/Header/LoginHeader';
-import Searcher from 'src/components/Header/Searcher';
+import LoginHeader from 'core/components/Header/LoginHeader';
+import Searcher from 'core/components/Header/Searcher';
 import TypeSelector from './TypeSelector';
 
 import { useRouter } from 'next/router';

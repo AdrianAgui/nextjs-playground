@@ -1,10 +1,10 @@
-import DropdownArrow from './../Icons/DropdownArrow';
+import DropdownArrow from '../Icons/DropdownArrow';
 import Image from 'next/image';
 import { useState, useRef } from 'react';
-import capitalize from 'src/utils/capitalize';
-import useOutsideClick from 'src/hooks/useOutsideClick';
-import { pokeTypes } from 'src/data/pokeTypes';
-import { useGlobalContext } from './../../context/GlobalContext';
+import capitalize from 'core/utils/capitalize';
+import useOutsideClick from 'core/hooks/useOutsideClick';
+import { pokeTypes } from 'core/data/pokeTypes';
+import { useGlobalContext } from '../../context/GlobalContext';
 
 export default function TypeSelector() {
   const { setPokeType } = useGlobalContext();
@@ -16,7 +16,7 @@ export default function TypeSelector() {
   useOutsideClick(wrapperRef, () => setOpenDropdown(false));
 
   const onSelectItem = (value) => {
-    setSelectedType(capitalize(value));
+    setSelectedType(value);
     setPokeType(value);
     setOpenDropdown(false);
   };
@@ -33,7 +33,7 @@ export default function TypeSelector() {
             {selectedType ? (
               <div className='flex items-center'>
                 <Image src={`/poketypes/${selectedType}.png`} alt={selectedType} width={24} height={24} layout='fixed'></Image>
-                <span className='ml-2'>{selectedType}</span>
+                <span className='ml-2'>{capitalize(selectedType)}</span>
               </div>
             ) : (
               'Select a type...'

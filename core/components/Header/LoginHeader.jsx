@@ -2,8 +2,8 @@ import Github from '../Icons/Github';
 import Google from '../Icons/Google';
 import { useState, useEffect } from 'react';
 import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from '../../firebase/client';
-import { LOGIN_TYPE } from 'src/utils/constants';
-import { useGlobalContext } from 'src/context/GlobalContext';
+import { LOGIN_TYPE } from 'core/utils/constants';
+import { useGlobalContext } from 'core/context/GlobalContext';
 import { Avatar, Button, Spinner, Text } from '@chakra-ui/react';
 
 export default function LoginHeader() {
@@ -51,7 +51,7 @@ export default function LoginHeader() {
     <div className='flex items-center'>
       {user === null && (
         <>
-          <div className='flex flex-col'>
+          <div className='flex flex-row md:flex-col'>
             <Button
               as='button'
               className='mb-3'
@@ -70,6 +70,7 @@ export default function LoginHeader() {
 
             <Button
               as='button'
+              className='ml-3 md:ml-0'
               size='lg'
               bg='#0F172A'
               _hover={{ bg: '#0F172Add' }}

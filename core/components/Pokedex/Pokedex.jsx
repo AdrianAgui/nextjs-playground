@@ -2,11 +2,11 @@ import css from 'styles/Pokedex.module.scss';
 
 import PokedexScreen from './PokedexScreen';
 import PokedexForm from './PokedexForm';
-import { getApiPokemon } from 'src/services/GetPokemons';
+import { getApiPokemon } from 'core/services/GetPokemons';
 
 import { useState, useEffect } from 'react';
-import { TOTAL_POKEMON } from 'src/utils/constants';
-import randomPokemon from './../../utils/randomPokemon';
+import { TOTAL_POKEMON } from 'core/utils/constants';
+import randomPokemon from '../../utils/randomPokemon';
 
 export default function Pokedex() {
   const [error, setError] = useState(false);

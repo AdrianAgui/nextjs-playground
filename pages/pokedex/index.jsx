@@ -1,5 +1,5 @@
-import PageLayout from 'src/components/PageLayout';
-import Pokedex from 'src/components/Pokedex/Pokedex';
+import PageLayout from 'core/components/PageLayout';
+import Pokedex from 'core/components/Pokedex/Pokedex';
 
 export default function PokedexPage() {
   return (

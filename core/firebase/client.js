@@ -1,7 +1,7 @@
 import { getApps, initializeApp } from '@firebase/app';
 import { getAuth, signInWithPopup, signOut, GithubAuthProvider, onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
 import { firebaseConfig } from './config';
-import { LOGIN_TYPE } from 'src/utils/constants';
+import { LOGIN_TYPE } from 'core/utils/constants';
 
 !getApps().length && initializeApp(firebaseConfig);
 const auth = getAuth();

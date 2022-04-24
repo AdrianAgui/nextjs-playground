@@ -1,22 +1,31 @@
 .myteam {
   grid-area: myteam;
+  padding: 1rem;
 }
 .pokegrid {
   grid-area: pokegrid;
-  min-height: 300px;
 }
 .pokedex {
   grid-area: pokedex;
-  min-height: 300px;
 }
 
-.myteam,
-.pokedex,
-.pokegrid {
+.pokegrid,
+.pokedex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+  img {
+    border-radius: 15px;
+    max-height: 350px;
+  }
+}
+
+.myteam {
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #fff;
-  padding: 1rem;
   margin: 0.5rem;
 }
 
@@ -30,14 +39,14 @@
   grid-template-rows: auto;
   grid-template-areas:
     'myteam myteam'
-    'pokegrid pokedex';
+    'pokedex pokegrid';
 
   @media (max-width: 767px) {
     width: 90%;
     grid-template-columns: 100%;
     grid-template-areas:
       'myteam'
-      'pokegrid'
-      'pokedex';
+      'pokedex'
+      'pokegrid';
   }
 }

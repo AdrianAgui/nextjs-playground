@@ -1,6 +1,6 @@
-import { LIMIT } from 'src/utils/constants';
-import capitalize from 'src/utils/capitalize';
-import sleeper from 'src/utils/sleeper';
+import { LIMIT } from 'core/utils/constants';
+import capitalize from 'core/utils/capitalize';
+import sleeper from 'core/utils/sleeper';
 
 const locator = 'https://pokeapi.co/api/v2';
 
