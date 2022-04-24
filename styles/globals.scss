@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './variables.css';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: Lato, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.content-container {
+  min-height: calc(100vh - 88px);
+  background-color: whitesmoke;
+}
+
+.footer-pin {
+  position: relative;
+  left: 0;
+  bottom: 0;
+}
