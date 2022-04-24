@@ -1,12 +1,12 @@
-import DropdownArrow from '../Icons/DropdownArrow';
+import DropdownArrow from '../../Icons/DropdownArrow';
 import Image from 'next/image';
-import { useState, useRef } from 'react';
+import { useState, useRef, memo } from 'react';
 import capitalize from 'core/utils/capitalize';
 import useOutsideClick from 'core/hooks/useOutsideClick';
-import { pokeTypes } from 'core/data/pokeTypes';
-import { useGlobalContext } from '../../context/GlobalContext';
+import { pokeTypes } from './pokeTypes';
+import { useGlobalContext } from '../../../context/GlobalContext';
 
-export default function TypeSelector() {
+function TypeSelector() {
   const { setPokeType } = useGlobalContext();
 
   const [selectedType, setSelectedType] = useState(null);
@@ -57,3 +57,5 @@ export default function TypeSelector() {
     </div>
   );
 }
+
+export default memo(TypeSelector);
