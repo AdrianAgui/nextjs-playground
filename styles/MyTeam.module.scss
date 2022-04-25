@@ -4,6 +4,10 @@
   gap: 40px;
   justify-items: center;
   padding: 2rem 5rem;
+
+  @media (max-width: 810px) {
+    padding: 1rem 0;
+  }
 }
 
 .pokeball {

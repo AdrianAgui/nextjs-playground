@@ -21,7 +21,7 @@ export default function Pokedex() {
   const randomId = randomPokemon();
   const [pokemonId, setPokemonId] = useState(randomId);
 
-  const handleRandomPokemon = useCallback(() => {
+  const handleRandom = useCallback(() => {
     setPokemonId(Math.floor(Math.random() * TOTAL_POKEMON));
   });
 
@@ -59,7 +59,7 @@ export default function Pokedex() {
           </div>
           <div className={css['pokedex-left-bottom']}>
             <div className='flex items-center'>
-              <input type='button' className={`${css['pokemon-btn']} text-3xl font-bold`} value='?' onClick={handleRandomPokemon} />
+              <input type='button' className={`${css['pokemon-btn']} text-3xl font-bold`} value='?' onClick={handleRandom} />
               <div className='flex flex-col ml-3 text-lg font-bold'>
                 <div
                   className={`flex justify-center items-center mb-1 cursor-pointer ${css['light']} ${css['is-green']} ${css['is-large']}`}
