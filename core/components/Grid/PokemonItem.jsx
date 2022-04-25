@@ -13,7 +13,7 @@ function PokemonItem({ pokemon }) {
       <Link href={`/pokemon/${id}`} key={id}>
         <a>
           <div className='flex justify-center items-center'>
-            <Image src={pathImage} alt={`Image for ${name}`} width={96} height={96} layout='fixed'></Image>
+            <Image src={pathImage} alt={`Image for ${name}`} width={96} height={96} layout='fixed' title={name}></Image>
             <Text fontSize='xl'>{name}</Text>
           </div>
         </a>

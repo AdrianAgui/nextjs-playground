@@ -28,11 +28,15 @@ function MyTeam() {
 
   return (
     <>
-      <div className={css.myTeamContainer}>
-        {team.map((pokemon, index) => (
-          <Slot key={index} pokemon={pokemon} />
-        ))}
-      </div>
+      {user ? (
+        <div className={css.myTeamContainer}>
+          {team.map((pokemon, index) => (
+            <Slot key={index} pokemon={pokemon} />
+          ))}
+        </div>
+      ) : (
+        <div className='flex justify-center font-semibold'>Para ver a tu equipo Pokemon, tienes que hacer Login</div>
+      )}
     </>
   );
 }
