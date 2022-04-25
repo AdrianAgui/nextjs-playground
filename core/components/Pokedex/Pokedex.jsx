@@ -58,7 +58,7 @@ export default function Pokedex() {
             <PokedexScreen pokemon={pokemon} loading={loading} error={error} />
           </div>
           <div className={css['pokedex-left-bottom']}>
-            <div className='flex items-center'>
+            <div className='flex items-center justify-between'>
               <input type='button' className={`${css['pokemon-btn']} text-3xl font-bold`} value='?' onClick={handleRandom} />
               <div className='flex flex-col ml-3 text-lg font-bold'>
                 <div

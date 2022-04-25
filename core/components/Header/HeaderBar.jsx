@@ -11,7 +11,7 @@ export default function HeaderBar() {
   return (
     <>
       <div className='flex flex-col min-h-[175px] md:flex-row items-center justify-between p-8'>
-        <Logo width={200} height={70} />
+        <Logo width={220} height={70} />
 
         <div className='flex items-center mt-8 md:mt-0'>
           <Searcher />
