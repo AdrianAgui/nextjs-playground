@@ -10,9 +10,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { TOTAL_POKEMON } from 'core/utils/constants';
 import randomPokemon from 'core/utils/randomPokemon';
 import Link from 'next/link';
+import { useToast } from '@chakra-ui/react';
+import capitalize from './../../utils/capitalize';
 
 export default function Pokedex() {
-  const { user } = useGlobalContext();
+  const { user, myTeam } = useGlobalContext();
+  const toast = useToast();
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -26,7 +29,25 @@ export default function Pokedex() {
   });
 
   const handleCatch = useCallback(() => {
-    addTeamMate(user.uid, pokemon);
+    if (user && myTeam.length >= 0 && myTeam.length < 6) {
+      addTeamMate(user.uid, pokemon);
+      toast({
+        title: `${capitalize(pokemon.name)} has been catched!`,
+        position: 'bottom-left',
+        status: 'success',
+        duration: 3000,
+        isClosable: true
+      });
+    } else {
+      toast({
+        title: `Error adding ${capitalize(pokemon.name)}`,
+        description: 'Your team only can have 6 pokemons max',
+        position: 'bottom-left',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      });
+    }
   });
 
   useEffect(() => {
@@ -61,12 +82,14 @@ export default function Pokedex() {
             <div className='flex items-center justify-between'>
               <input type='button' className={`${css['pokemon-btn']} text-3xl font-bold`} value='?' onClick={handleRandom} />
               <div className='flex flex-col ml-3 text-lg font-bold'>
-                <div
-                  className={`flex justify-center items-center mb-1 cursor-pointer ${css['light']} ${css['is-green']} ${css['is-large']}`}
-                  onClick={handleCatch}
-                >
-                  Catch!
-                </div>
+                {user && (
+                  <div
+                    className={`flex justify-center items-center mb-1 cursor-pointer ${css['light']} ${css['is-green']} ${css['is-large']}`}
+                    onClick={handleCatch}
+                  >
+                    Catch!
+                  </div>
+                )}
                 <div className={`flex justify-center items-center cursor-pointer ${css['light']} ${css['is-orange']} ${css['is-large']}`}>
                   <Link href={`/pokemon/${pokemonId}`}>
                     <a className='flex items-center'>Detail</a>

@@ -8,7 +8,7 @@ import { getTeam } from 'core/firebase/teams';
 import { TEAM_LIMIT } from 'core/utils/constants';
 
 function MyTeam() {
-  const { user } = useGlobalContext();
+  const { user, setMyTeam } = useGlobalContext();
 
   const [team, setTeam] = useState([]);
 
@@ -19,9 +19,11 @@ function MyTeam() {
           const emptySlots = TEAM_LIMIT - team.length;
           const emptySlotsArray = Array.from({ length: emptySlots }, (_, i) => i);
           setTeam(team.concat(emptySlotsArray));
+          setMyTeam(team);
         });
       } else {
         setTeam([]);
+        setMyTeam([]);
       }
     });
   }, [user]);
@@ -35,7 +37,7 @@ function MyTeam() {
           ))}
         </div>
       ) : (
-        <div className='flex justify-center font-semibold'>Para ver a tu equipo Pokemon, tienes que hacer Login</div>
+        <div className='flex justify-center font-semibold'>To build your Pokemon team, you have to Login</div>
       )}
     </>
   );
