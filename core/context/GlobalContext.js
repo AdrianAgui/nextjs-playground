@@ -5,6 +5,7 @@ export const GlobalContext = createContext(null);
 export const GlobalContextProvider = ({ children }) => {
   const [user, setUser] = useState(false);
   const [pokeType, setPokeType] = useState('');
+  const [myTeam, setMyTeam] = useState([]);
 
   useEffect(() => {}, [user, pokeType]);
 
@@ -13,9 +14,11 @@ export const GlobalContextProvider = ({ children }) => {
       user,
       setUser,
       pokeType,
-      setPokeType
+      setPokeType,
+      myTeam,
+      setMyTeam
     }),
-    [user, pokeType]
+    [user, pokeType, myTeam]
   );
 
   return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;

@@ -2,8 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Text } from '@chakra-ui/react';
 import PokemonSkeleton from './PokemonSkeleton';
+import { memo } from 'react';
 
-export default function PokemonItem({ pokemon }) {
+function PokemonItem({ pokemon }) {
   if (pokemon) {
     const { id, name } = pokemon;
     let pathImage = pokemon.sprites?.front_default;
@@ -12,7 +13,7 @@ export default function PokemonItem({ pokemon }) {
       <Link href={`/pokemon/${id}`} key={id}>
         <a>
           <div className='flex justify-center items-center'>
-            <Image src={pathImage} alt={`Image for ${name}`} width={96} height={96} layout='fixed'></Image>
+            <Image src={pathImage} alt={`Image for ${name}`} width={96} height={96} layout='fixed' title={name}></Image>
             <Text fontSize='xl'>{name}</Text>
           </div>
         </a>
@@ -22,3 +23,5 @@ export default function PokemonItem({ pokemon }) {
     return <PokemonSkeleton />;
   }
 }
+
+export default memo(PokemonItem, (prevProps, nextProps) => prevProps.pokemon === nextProps.pokemon);

@@ -3,12 +3,20 @@ import css from 'styles/Pokedex.module.scss';
 import PokedexScreen from './PokedexScreen';
 import PokedexForm from './PokedexForm';
 import { getApiPokemon } from 'core/services/GetPokemons';
+import { addTeamMate } from 'core/firebase/teams';
+import { useGlobalContext } from 'core/context/GlobalContext';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { TOTAL_POKEMON } from 'core/utils/constants';
-import randomPokemon from '../../utils/randomPokemon';
+import randomPokemon from 'core/utils/randomPokemon';
+import Link from 'next/link';
+import { useToast } from '@chakra-ui/react';
+import capitalize from './../../utils/capitalize';
 
 export default function Pokedex() {
+  const { user, myTeam } = useGlobalContext();
+  const toast = useToast();
+
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [pokemon, setPokemon] = useState(null);
@@ -16,9 +24,31 @@ export default function Pokedex() {
   const randomId = randomPokemon();
   const [pokemonId, setPokemonId] = useState(randomId);
 
-  const handleRandomPokemon = () => {
+  const handleRandom = useCallback(() => {
     setPokemonId(Math.floor(Math.random() * TOTAL_POKEMON));
-  };
+  });
+
+  const handleCatch = useCallback(() => {
+    if (user && myTeam.length >= 0 && myTeam.length < 6) {
+      addTeamMate(user.uid, pokemon);
+      toast({
+        title: `${capitalize(pokemon.name)} has been catched!`,
+        position: 'bottom-left',
+        status: 'success',
+        duration: 3000,
+        isClosable: true
+      });
+    } else {
+      toast({
+        title: `Error adding ${capitalize(pokemon.name)}`,
+        description: 'Your team only can have 6 pokemons max',
+        position: 'bottom-left',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      });
+    }
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -49,11 +79,22 @@ export default function Pokedex() {
             <PokedexScreen pokemon={pokemon} loading={loading} error={error} />
           </div>
           <div className={css['pokedex-left-bottom']}>
-            <div className={`flex ${css['pokedex-left-lights']}`}>
-              <input type='button' className={`${css['pokemon-btn']} text-3xl font-bold`} value='?' onClick={handleRandomPokemon} />
-              <div className='flex flex-col ml-3'>
-                <div className={`mb-1 ${css['light']} ${css['is-green']} ${css['is-large']}`} />
-                <div className={`${css['light']} ${css['is-orange']} ${css['is-large']}`} />
+            <div className='flex items-center justify-between'>
+              <input type='button' className={`${css['pokemon-btn']} text-3xl font-bold`} value='?' onClick={handleRandom} />
+              <div className='flex flex-col ml-3 text-lg font-bold'>
+                {user && (
+                  <div
+                    className={`flex justify-center items-center mb-1 cursor-pointer ${css['light']} ${css['is-green']} ${css['is-large']}`}
+                    onClick={handleCatch}
+                  >
+                    Catch!
+                  </div>
+                )}
+                <div className={`flex justify-center items-center cursor-pointer ${css['light']} ${css['is-orange']} ${css['is-large']}`}>
+                  <Link href={`/pokemon/${pokemonId}`}>
+                    <a className='flex items-center'>Detail</a>
+                  </Link>
+                </div>
               </div>
             </div>
             <PokedexForm pokemonId={pokemonId} setPokemonId={setPokemonId} setLoading={setLoading} />

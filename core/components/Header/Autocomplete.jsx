@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import capitalize from 'core/utils/capitalize';
 
 export default function Autocomplete(props) {
   return (
@@ -17,7 +18,7 @@ export default function Autocomplete(props) {
                 <Link href={`/pokemon/${id}`}>
                   <a className='flex items-center'>
                     <Image src={front_default} alt={`Image for ${name}`} width={54} height={54}></Image>
-                    <span className='pl-4 text-md font-bold text-ellipsis whitespace-nowrap'>{name}</span>
+                    <span className='pl-4 text-md font-bold text-ellipsis whitespace-nowrap'>{capitalize(name)}</span>
                   </a>
                 </Link>
               </div>

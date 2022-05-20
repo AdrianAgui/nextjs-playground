@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, memo } from 'react';
 import { LIMIT_SEARCH } from '../../utils/constants';
 import Autocomplete from 'core/components/Header/Autocomplete';
 
-export default function Searcher() {
+function Searcher() {
   const [results, setResults] = useState([]);
   const [showAutocomplete, setShowAutocomplete] = useState(false);
   const searchRef = useRef();
@@ -34,3 +34,5 @@ export default function Searcher() {
     </div>
   );
 }
+
+export default memo(Searcher);

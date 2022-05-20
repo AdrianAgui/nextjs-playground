@@ -1,9 +1,7 @@
-import Link from 'next/link';
-import Image from 'next/image';
-
+import Logo from './Logo';
 import LoginHeader from 'core/components/Header/LoginHeader';
 import Searcher from 'core/components/Header/Searcher';
-import TypeSelector from './TypeSelector';
+import TypeSelector from './TypeSelector/TypeSelector';
 
 import { useRouter } from 'next/router';
 
@@ -13,11 +11,7 @@ export default function HeaderBar() {
   return (
     <>
       <div className='flex flex-col min-h-[175px] md:flex-row items-center justify-between p-8'>
-        <Link href='/'>
-          <a>
-            <Image src='/logo.png' alt='logo-pokegen' width={256} height={75} title='this will be displayed as a tooltip'></Image>
-          </a>
-        </Link>
+        <Logo width={220} height={70} />
 
         <div className='flex items-center mt-8 md:mt-0'>
           <Searcher />
@@ -25,7 +19,7 @@ export default function HeaderBar() {
         </div>
 
         <div className='mt-8 md:mt-0'>
-          <LoginHeader></LoginHeader>
+          <LoginHeader />
         </div>
       </div>
     </>

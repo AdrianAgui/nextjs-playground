@@ -1,12 +1,12 @@
-import DropdownArrow from '../Icons/DropdownArrow';
+import DropdownArrow from '../../Icons/DropdownArrow';
 import Image from 'next/image';
-import { useState, useRef } from 'react';
+import { useState, useRef, memo } from 'react';
 import capitalize from 'core/utils/capitalize';
 import useOutsideClick from 'core/hooks/useOutsideClick';
-import { pokeTypes } from 'core/data/pokeTypes';
-import { useGlobalContext } from '../../context/GlobalContext';
+import { pokeTypes } from './pokeTypes';
+import { useGlobalContext } from 'core/context/GlobalContext';
 
-export default function TypeSelector() {
+function TypeSelector() {
   const { setPokeType } = useGlobalContext();
 
   const [selectedType, setSelectedType] = useState(null);
@@ -47,7 +47,7 @@ export default function TypeSelector() {
             <div className='inline-grid gap-2 grid-cols-4 p-4'>
               {pokeTypes.map(({ key, image }) => (
                 <div key={key} className='hover:bg-gray-300 cursor-pointer p-1 w-12 h-12 rounded-3xl' onClick={() => onSelectItem(key)}>
-                  <Image src={image} alt={key} width={40} height={40} layout='fixed'></Image>
+                  <Image src={image} alt={key} width={40} height={40} layout='fixed' title={capitalize(key)}></Image>
                 </div>
               ))}
             </div>
@@ -57,3 +57,5 @@ export default function TypeSelector() {
     </div>
   );
 }
+
+export default memo(TypeSelector);

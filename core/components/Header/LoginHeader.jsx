@@ -1,19 +1,19 @@
 import Github from '../Icons/Github';
 import Google from '../Icons/Google';
-import { useState, useEffect } from 'react';
-import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from '../../firebase/client';
+import { useState, useEffect, memo } from 'react';
+import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from 'core/firebase/auth';
 import { LOGIN_TYPE } from 'core/utils/constants';
 import { useGlobalContext } from 'core/context/GlobalContext';
 import { Avatar, Button, Spinner, Text } from '@chakra-ui/react';
 
-export default function LoginHeader() {
+function LoginHeader() {
   const { user, setUser } = useGlobalContext();
 
   const [loadingLogin, setLoadingLogin] = useState(false);
   const [typeLogin, setTypeLogin] = useState(null);
 
   useEffect(() => {
-    onAuthStateChanges(setUser);
+    onAuthStateChanges().then(setUser);
   }, [setUser]);
 
   const handleLoginClick = (loginType) => {
@@ -101,3 +101,5 @@ export default function LoginHeader() {
     </div>
   );
 }
+
+export default memo(LoginHeader);
