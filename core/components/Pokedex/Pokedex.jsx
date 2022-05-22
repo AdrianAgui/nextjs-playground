@@ -12,9 +12,11 @@ import randomPokemon from 'core/utils/randomPokemon';
 import Link from 'next/link';
 import { useToast } from '@chakra-ui/react';
 import capitalize from './../../utils/capitalize';
+import { useRouter } from 'next/router';
 
 export default function Pokedex() {
   const { user, myTeam } = useGlobalContext();
+  const { locale } = useRouter();
   const toast = useToast();
 
   const [error, setError] = useState(false);
@@ -91,7 +93,7 @@ export default function Pokedex() {
                   </div>
                 )}
                 <div className={`flex justify-center items-center cursor-pointer ${css['light']} ${css['is-orange']} ${css['is-large']}`}>
-                  <Link href={`/pokemon/${pokemonId}`}>
+                  <Link locale={locale} href={`/pokemon/${pokemonId}`}>
                     <a className='flex items-center'>Detail</a>
                   </Link>
                 </div>

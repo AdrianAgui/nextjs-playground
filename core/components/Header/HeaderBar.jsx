@@ -2,6 +2,7 @@ import Logo from './Logo';
 import LoginHeader from 'core/components/Header/LoginHeader';
 import Searcher from 'core/components/Header/Searcher';
 import TypeSelector from './TypeSelector/TypeSelector';
+import LangsSelector from './LangsSelector';
 
 import { useRouter } from 'next/router';
 
@@ -18,8 +19,9 @@ export default function HeaderBar() {
           {router.pathname.includes('grid') && <TypeSelector />}
         </div>
 
-        <div className='mt-8 md:mt-0'>
+        <div className='flex items-center mt-8 md:mt-0'>
           <LoginHeader />
+          <LangsSelector />
         </div>
       </div>
     </>
