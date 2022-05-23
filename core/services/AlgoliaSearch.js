@@ -1,6 +1,9 @@
 import algoliasearch from 'algoliasearch/lite';
 
-const client = algoliasearch('1RKVX9BEPV', 'cf4e982fae5d7c6c5971acb245c2def1');
+const APP_ID = process.env.ALGOLIA_APP_ID;
+const API_KEY = process.env.ALGOLIA_API_KEY;
+
+const client = algoliasearch(APP_ID, API_KEY);
 const index = client.initIndex('pokedex-gen');
 
 const CACHE = {};

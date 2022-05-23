@@ -1,5 +1,5 @@
 export const firebaseConfig = {
-  apiKey: 'AIzaSyBB2nIaqpOoI-x3tQS05yayAIYkps6Ev1E',
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: 'pokedex-d05a6.firebaseapp.com',
   projectId: 'pokedex-d05a6',
   storageBucket: 'pokedex-d05a6.appspot.com',
