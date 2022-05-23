@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import capitalize from 'core/utils/capitalize';
+import { useRouter } from 'next/router';
 
 export default function Autocomplete(props) {
+  const { locale } = useRouter();
+
   return (
     <div className='relative z-50'>
       <div className='absolute w-full top-0 left-0'>
@@ -15,7 +18,7 @@ export default function Autocomplete(props) {
             } = result;
             return (
               <div className='px-2 m-0 hover:bg-slate-200' key={id}>
-                <Link href={`/pokemon/${id}`}>
+                <Link locale={locale} href={`/pokemon/${id}`}>
                   <a className='flex items-center'>
                     <Image src={front_default} alt={`Image for ${name}`} width={54} height={54}></Image>
                     <span className='pl-4 text-md font-bold text-ellipsis whitespace-nowrap'>{capitalize(name)}</span>

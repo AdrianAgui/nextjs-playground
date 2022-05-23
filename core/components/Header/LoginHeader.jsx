@@ -5,9 +5,11 @@ import { login, mapUserFromFirebaseAuth, logout, onAuthStateChanges } from 'core
 import { LOGIN_TYPE } from 'core/utils/constants';
 import { useGlobalContext } from 'core/context/GlobalContext';
 import { Avatar, Button, Spinner, Text } from '@chakra-ui/react';
+import { useI18n } from 'core/context/i18nContext';
 
 function LoginHeader() {
   const { user, setUser } = useGlobalContext();
+  const { translator } = useI18n();
 
   const [loadingLogin, setLoadingLogin] = useState(false);
   const [typeLogin, setTypeLogin] = useState(null);
@@ -64,7 +66,7 @@ function LoginHeader() {
             >
               <div className='flex items-center'>
                 <Google className='mr-1' />
-                <span className='text-gray-800 text-sm hidden lg:block'>Login with Google</span>
+                <span className='text-gray-800 text-sm hidden lg:block'>{translator('login.google')}</span>
               </div>
             </Button>
 
@@ -80,7 +82,7 @@ function LoginHeader() {
             >
               <div className='flex items-center'>
                 <Github className='mr-1' />
-                <span className='text-white text-sm hidden lg:block'>Login with Github</span>
+                <span className='text-white text-sm hidden lg:block'>{translator('login.github')}</span>
               </div>
             </Button>
           </div>

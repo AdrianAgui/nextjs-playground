@@ -1,9 +1,12 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function PokeGridLink() {
+  const { locale } = useRouter();
+
   return (
     <picture className='relative p-1'>
-      <Link href={'/pokemon/grid'}>
+      <Link locale={locale} href={'/pokemon/grid'}>
         <a>
           <div className='relative'>
             <div className='absolute top-2 right-0 pt-3 pr-3 z-10'>

@@ -3,14 +3,17 @@ import Link from 'next/link';
 import { Text } from '@chakra-ui/react';
 import PokemonSkeleton from './PokemonSkeleton';
 import { memo } from 'react';
+import { useRouter } from 'next/router';
 
 function PokemonItem({ pokemon }) {
+  const { locale } = useRouter();
+
   if (pokemon) {
     const { id, name } = pokemon;
     let pathImage = pokemon.sprites?.front_default;
 
     return (
-      <Link href={`/pokemon/${id}`} key={id}>
+      <Link locale={locale} href={`/pokemon/${id}`} key={id}>
         <a>
           <div className='flex justify-center items-center'>
             <Image src={pathImage} alt={`Image for ${name}`} width={96} height={96} layout='fixed' title={name}></Image>

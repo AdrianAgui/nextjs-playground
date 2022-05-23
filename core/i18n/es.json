@@ -1,0 +1,6 @@
+{
+  "welcome.logged": "Bienvenido <strong>%1</strong> a PokeGen, aplicación creada con <strong>%2</strong>.",
+  "welcome.unlogged": "Para crear tu equipo Pokemon, debes iniciar sesión.",
+  "login.google": "Acceder con Google",
+  "login.github": "Acceder con Github"
+}

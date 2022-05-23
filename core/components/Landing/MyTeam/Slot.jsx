@@ -4,13 +4,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import css from 'styles/MyTeam.module.scss';
+import { useRouter } from 'next/router';
 
 function Slot({ pokemon }) {
+  const { locale } = useRouter();
+
   return (
     <div key={pokemon.id} className='relative'>
       <div className={pokemon.id && css.teamMate}>
         {pokemon && pokemon.id ? (
-          <Link href={`pokemon/${pokemon.id}`}>
+          <Link locale={locale} href={`pokemon/${pokemon.id}`}>
             <a>
               <Image src={pokemon.imageURL} alt={pokemon.name} className='z-10' width={150} height={150} />
             </a>

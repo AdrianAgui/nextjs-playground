@@ -1,5 +1,8 @@
 import { Container, Box, Text } from '@chakra-ui/react';
 import { useGlobalContext } from 'core/context/GlobalContext';
+import { useI18n } from 'core/context/i18nContext';
+
+import parse from 'html-react-parser';
 
 import css from 'styles/Landing.module.scss';
 
@@ -9,16 +12,19 @@ import MyTeam from './MyTeam/MyTeam';
 
 export default function Landing() {
   const { user } = useGlobalContext();
+  const { translator } = useI18n();
 
   return (
     <>
-      <Container maxW='md'>
-        <Box borderRadius='md' px='4' py='4' bg='blue.600' maxW='lg' align='center'>
-          <Text className='w-25' as='span' fontSize='16px' color='white' align='center'>
-            Welcome <b>{user ? user.name : 'Username'}</b> to PokeGen, app created with <b>NextJS</b>.
-          </Text>
-        </Box>
-      </Container>
+      {user && (
+        <Container maxW='md'>
+          <Box borderRadius='md' px='4' py='4' bg='blue.600' maxW='lg' align='center'>
+            <Text className='w-25' as='span' fontSize='16px' color='white' align='center'>
+              {parse(translator('welcome.logged', user ? user.name : 'Username', 'NextJS'))}
+            </Text>
+          </Box>
+        </Container>
+      )}
 
       <section className={css.wrapper}>
         <article className={css.myteam}>

@@ -6,10 +6,13 @@ import { Heading } from '@chakra-ui/react';
 
 import { TOTAL_POKEMON } from 'core/utils/constants';
 import capitalize from 'core/utils/capitalize';
+import { useRouter } from 'next/router';
 
 const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
 export default function PokeDetailPage({ idNum, name, front_default, prevId, nextId, hasPrev, hasNext }) {
+  const { locale } = useRouter();
+
   return (
     <PageLayout title={`${idNum} | ${name}`}>
       <div className='m-3 sm:m-0'>
@@ -25,7 +28,7 @@ export default function PokeDetailPage({ idNum, name, front_default, prevId, nex
           <div className='flex justify-between font-bold w-50 mx-auto'>
             <span className='flex justify-start'>
               {hasPrev && (
-                <Link href={`/pokemon/${prevId}`}>
+                <Link locale={locale} href={`/pokemon/${prevId}`}>
                   <a>⏮️ Previous</a>
                 </Link>
               )}
@@ -33,7 +36,7 @@ export default function PokeDetailPage({ idNum, name, front_default, prevId, nex
 
             <span className='flex justify-end '>
               {hasNext && (
-                <Link href={`/pokemon/${nextId}`}>
+                <Link locale={locale} href={`/pokemon/${nextId}`}>
                   <a>Next ⏭️</a>
                 </Link>
               )}
@@ -46,9 +49,15 @@ export default function PokeDetailPage({ idNum, name, front_default, prevId, nex
 }
 
 export async function getStaticPaths() {
-  const paramIds = Array.from({ length: TOTAL_POKEMON }, (_, i) => {
-    return { params: { id: String(i + 1) } };
+  const paramIdsEn = Array.from({ length: TOTAL_POKEMON }, (_, i) => {
+    return { params: { id: String(i + 1) }, locale: 'en' };
   });
+
+  const paramIdsEs = Array.from({ length: TOTAL_POKEMON }, (_, i) => {
+    return { params: { id: String(i + 1) }, locale: 'es' };
+  });
+
+  const paramIds = paramIdsEn.concat(paramIdsEs);
 
   return {
     paths: paramIds,
