@@ -1,17 +1,19 @@
 import PageLayout from 'core/components/PageLayout';
+import capitalize from 'core/utils/capitalize';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Heading } from '@chakra-ui/react';
 
+import { Heading } from '@chakra-ui/react';
 import { TOTAL_POKEMON } from 'core/utils/constants';
-import capitalize from 'core/utils/capitalize';
 import { useRouter } from 'next/router';
+import { useI18n } from 'core/context/i18nContext';
 
 const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
 export default function PokeDetailPage({ idNum, name, front_default, prevId, nextId, hasPrev, hasNext }) {
   const { locale } = useRouter();
+  const { translator } = useI18n();
 
   return (
     <PageLayout title={`${idNum} | ${name}`}>
@@ -29,7 +31,7 @@ export default function PokeDetailPage({ idNum, name, front_default, prevId, nex
             <span className='flex justify-start'>
               {hasPrev && (
                 <Link locale={locale} href={`/pokemon/${prevId}`}>
-                  <a>⏮️ Previous</a>
+                  <a>⏮️ {translator('previous')}</a>
                 </Link>
               )}
             </span>
@@ -37,7 +39,7 @@ export default function PokeDetailPage({ idNum, name, front_default, prevId, nex
             <span className='flex justify-end '>
               {hasNext && (
                 <Link locale={locale} href={`/pokemon/${nextId}`}>
-                  <a>Next ⏭️</a>
+                  <a>{translator('next')} ⏭️</a>
                 </Link>
               )}
             </span>

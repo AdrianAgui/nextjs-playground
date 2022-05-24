@@ -1,10 +1,14 @@
 import { useState, useRef, memo } from 'react';
 import { LIMIT_SEARCH } from '../../utils/constants';
+import { useI18n } from 'core/context/i18nContext';
 import Autocomplete from 'core/components/Header/Autocomplete';
 
 function Searcher() {
+  const { translator } = useI18n();
+
   const [results, setResults] = useState([]);
   const [showAutocomplete, setShowAutocomplete] = useState(false);
+
   const searchRef = useRef();
 
   const handleChange = async () => {
@@ -27,7 +31,7 @@ function Searcher() {
         onChange={handleChange}
         onFocus={onFocus}
         onBlur={onBlur}
-        placeholder='Search pokemon...'
+        placeholder={translator('placeholder.search')}
       />
 
       {showAutocomplete && Boolean(results.length) && <Autocomplete results={results}></Autocomplete>}
