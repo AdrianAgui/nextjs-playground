@@ -36,7 +36,7 @@
 }
 
 .pokedex-right-front {
-  background: var(--red);
+  background: #dd082f;
   height: calc(100% - 6rem);
   width: inherit;
   position: absolute;
@@ -56,7 +56,7 @@
   height: 5rem;
   position: absolute;
   bottom: 100%;
-  background: var(--red);
+  background: #dd082f;
   width: calc(100% - 9rem);
   right: 0;
   border-top: 1px solid black;
@@ -65,8 +65,8 @@
 
 .pokedex-right-front:after {
   content: '';
-  border-right: 2.5rem solid var(--red);
-  border-bottom: 2.5rem solid var(--red);
+  border-right: 2.5rem solid #dd082f;
+  border-bottom: 2.5rem solid #dd082f;
   border-left: 2.5rem solid transparent;
   border-top: 2.5rem solid transparent;
   position: absolute;
@@ -76,7 +76,7 @@
 }
 
 .pokedex-right-back {
-  background: var(--red);
+  background: #dd082f;
   height: calc(100% - 6rem);
   width: inherit;
   position: absolute;
@@ -102,7 +102,7 @@
   height: 5rem;
   position: absolute;
   bottom: 100%;
-  background-color: var(--red);
+  background-color: #dd082f;
   left: 0;
   border-top: 1px solid black;
   content: '';
@@ -110,8 +110,8 @@
 
 .pokedex-right-back:after {
   content: '';
-  border-left: 2.5rem solid var(--red);
-  border-bottom: 2.5rem solid var(--red);
+  border-left: 2.5rem solid #dd082f;
+  border-bottom: 2.5rem solid #dd082f;
   border-top: 2.5rem solid transparent;
   border-right: 2.5rem solid transparent;
   display: block;
@@ -140,7 +140,7 @@
     background-color: white;
   }
   50% {
-    background-color: var(--sky);
+    background-color: #01fbfb;
   }
   100% {
     background-color: white;
@@ -163,27 +163,26 @@
 }
 
 .light.is-red {
-  background-color: var(--red);
+  background-color: #dd082f;
 }
 .light.is-blue {
-  background-color: var(--blue);
+  background-color: #519afb;
 }
 .light.is-green {
-  background-color: var(--green);
+  background-color: #2ff901;
 }
 .light.is-sky {
-  background-color: var(--sky);
+  background-color: #01fbfb;
 }
 .light.is-orange {
-  background-color: var(--orange);
+  background-color: #ffcc02;
 }
-
 .light.is-yellow {
-  background-color: var(--yellow);
+  background-color: #ffcc02;
 }
 
 .pokedex-left {
-  background: var(--red);
+  background: #dd082f;
   height: inherit;
   width: inherit;
   border-radius: 10px 0 0 10px;

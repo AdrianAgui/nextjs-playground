@@ -25,7 +25,7 @@ function Searcher() {
   return (
     <div className='searcher'>
       <input
-        className='px-5 py-3 text-md border border-gray-400 rounded-3xl outline-0'
+        className='px-5 py-3 text-md border border-gray-400 rounded-3xl outline-0 text-center'
         type='search'
         ref={searchRef}
         onChange={handleChange}

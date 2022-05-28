@@ -1,50 +1,16 @@
 import PageLayout from 'core/components/PageLayout';
 import capitalize from 'core/utils/capitalize';
 
-import Image from 'next/image';
-import Link from 'next/link';
-
-import { Heading } from '@chakra-ui/react';
-import { TOTAL_POKEMON } from 'core/utils/constants';
-import { useRouter } from 'next/router';
-import { useI18n } from 'core/context/i18nContext';
+import PokemonDetail from './../../core/components/Detail/PokemonDetail';
+import { TOTAL_POKEMON } from './../../core/utils/constants';
 
 const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
-export default function PokeDetailPage({ idNum, name, front_default, prevId, nextId, hasPrev, hasNext }) {
-  const { locale } = useRouter();
-  const { translator } = useI18n();
-
+export default function PokeDetailPage({ ...data }) {
   return (
-    <PageLayout title={`${idNum} | ${name}`}>
+    <PageLayout title={`${data.pokemon.id} | ${data.name}`}>
       <div className='m-3 sm:m-0'>
-        <section className='max-w-md m-auto'>
-          <Heading as='h1' fontSize='40px' align='center'>
-            {name}
-          </Heading>
-
-          <div className='flex justify-center my-8 mx-3 sm:mx-10'>
-            <Image src={front_default} alt={`Image for ${name}`} width={360} height={260} layout='fixed'></Image>
-          </div>
-
-          <div className='flex justify-between font-bold w-50 mx-auto'>
-            <span className='flex justify-start'>
-              {hasPrev && (
-                <Link locale={locale} href={`/pokemon/${prevId}`}>
-                  <a>⏮️ {translator('previous')}</a>
-                </Link>
-              )}
-            </span>
-
-            <span className='flex justify-end '>
-              {hasNext && (
-                <Link locale={locale} href={`/pokemon/${nextId}`}>
-                  <a>{translator('next')} ⏭️</a>
-                </Link>
-              )}
-            </span>
-          </div>
-        </section>
+        <PokemonDetail {...data} />
       </div>
     </PageLayout>
   );
@@ -75,22 +41,11 @@ export async function getStaticProps({ params }) {
   const pokemon = { ...pokemonObj, name: capitalize(pokemonObj.name) };
 
   const { name } = pokemon;
-  const { idNum, prevId, nextId, hasPrev, hasNext } = pagination(id);
 
   let { front_default } = pokemon.sprites.other.dream_world;
   if (!front_default) {
     ({ front_default } = pokemon.sprites.other['official-artwork']);
   }
 
-  return { props: { idNum, name, front_default, prevId, nextId, hasPrev, hasNext } };
-}
-
-function pagination(id) {
-  return {
-    idNum: +id,
-    prevId: +id - 1,
-    nextId: +id + 1,
-    hasPrev: +id - 1 > 0,
-    hasNext: +id + 1 <= TOTAL_POKEMON
-  };
+  return { props: { pokemon, name, front_default } };
 }

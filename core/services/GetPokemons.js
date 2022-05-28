@@ -6,10 +6,17 @@ const locator = 'https://pokeapi.co/api/v2';
 
 const endpoint1 = (id) => `${locator}/pokemon/${id}`;
 const endpoint2 = (id) => `${locator}/pokemon-form/${id}`;
+const endpoint3 = (id) => `${locator}/pokemon-species/${id}`;
 const endpointPokemonType = `${locator}/type`;
 
 export async function getApiPokemon(id) {
   const pokemonFetched = await fetch(endpoint1(id));
+  const pokemon = await pokemonFetched.json();
+  return pokemon;
+}
+
+export async function getApiPokemonSpecie(id) {
+  const pokemonFetched = await fetch(endpoint3(id));
   const pokemon = await pokemonFetched.json();
   return pokemon;
 }

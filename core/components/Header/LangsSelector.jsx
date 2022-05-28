@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 import { useRouter } from 'next/router';
 import { useI18n } from 'core/context/i18nContext';
+import { useEffect, useState } from 'react';
 
 import SpanishFlag from './../Icons/Flags/Spanish';
 import EnglishFlag from './../Icons/Flags/English';
-import { useEffect, useState } from 'react';
 
 export default function LangsSelector() {
   const { pathname, locales, query } = useRouter();
@@ -14,7 +14,7 @@ export default function LangsSelector() {
 
   useEffect(() => {
     !pathname.includes('[id]') ? setPath(pathname) : setPath(pathname.replace('[id]', query.id));
-  }, []);
+  }, [query]);
 
   return (
     <nav className='ml-14'>
