@@ -35,7 +35,7 @@ export default function Pokedex() {
 
   const handleCatch = useCallback(() => {
     if (user && myTeam.length >= 0 && myTeam.length < 6) {
-      addTeamMate(user.uid, pokemon);
+      addTeamMate(user.uid, user.name, pokemon);
       toast({
         title: `${capitalize(pokemon.name)} has been catched!`,
         position: 'bottom-left',

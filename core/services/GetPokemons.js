@@ -4,26 +4,26 @@ import sleeper from 'core/utils/sleeper';
 
 const locator = 'https://pokeapi.co/api/v2';
 
-const endpoint1 = (id) => `${locator}/pokemon/${id}`;
-const endpoint2 = (id) => `${locator}/pokemon-form/${id}`;
-const endpoint3 = (id) => `${locator}/pokemon-species/${id}`;
+const endpointInfo = (id) => `${locator}/pokemon/${id}`;
+const endpointForm = (id) => `${locator}/pokemon-form/${id}`;
+const endpointSpecie = (id) => `${locator}/pokemon-species/${id}`;
 const endpointPokemonType = `${locator}/type`;
 
 export async function getApiPokemon(id) {
-  const pokemonFetched = await fetch(endpoint1(id));
+  const pokemonFetched = await fetch(endpointInfo(id));
   const pokemon = await pokemonFetched.json();
   return pokemon;
 }
 
 export async function getApiPokemonSpecie(id) {
-  const pokemonFetched = await fetch(endpoint3(id));
+  const pokemonFetched = await fetch(endpointSpecie(id));
   const pokemon = await pokemonFetched.json();
   return pokemon;
 }
 
 export async function getApiPokemons(offset = 0, limit = LIMIT) {
   const pokemonArray = Array.from({ length: limit }, (_, i) => offset + i + 1);
-  const pokemonsFetched = await Promise.all(pokemonArray.map((id) => fetch(endpoint2(id))));
+  const pokemonsFetched = await Promise.all(pokemonArray.map((id) => fetch(endpointForm(id))));
   const pokemons = await Promise.all(pokemonsFetched.map((p) => p.json()));
   await sleeper(500);
   return pokemons.map((poke) => {

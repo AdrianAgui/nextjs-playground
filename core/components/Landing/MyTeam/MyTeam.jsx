@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, memo, useCallback } from 'react';
 import css from 'styles/MyTeam.module.scss';
 
 import Slot from './Slot';
@@ -15,15 +15,17 @@ function MyTeam() {
 
   const [team, setTeam] = useState([]);
 
+  const buildTeam = useCallback((team) => {
+    const emptySlots = TEAM_LIMIT - team.length;
+    const emptySlotsArray = Array.from({ length: emptySlots }, (_, i) => i);
+    setTeam(team.concat(emptySlotsArray));
+    setMyTeam(team);
+  });
+
   useEffect(() => {
     onAuthStateChanges().then((user) => {
       if (user) {
-        getTeam(user?.uid).then((team) => {
-          const emptySlots = TEAM_LIMIT - team.length;
-          const emptySlotsArray = Array.from({ length: emptySlots }, (_, i) => i);
-          setTeam(team.concat(emptySlotsArray));
-          setMyTeam(team);
-        });
+        getTeam(user?.uid).then(buildTeam);
       } else {
         setTeam([]);
         setMyTeam([]);

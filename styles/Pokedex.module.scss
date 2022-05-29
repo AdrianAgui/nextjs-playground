@@ -245,7 +245,7 @@
     'img   stats';
 }
 .pokemon-name {
-  text-align: center;
+  display: flex;
   text-transform: capitalize;
   grid-area: title;
   font-weight: 700;
