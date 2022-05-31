@@ -14,5 +14,12 @@
   "createdby": "Creado por",
   "with": "con",
   "nextjs": "NextJS",
-  "close": "Cerrar"
+  "release": "Liberar",
+  "close": "Cerrar",
+  "info.id": "Identificación",
+  "info.trainer": "Entrenador",
+  "info.catch": "Fecha de captura",
+  "info.type": "Tipo",
+  "info.weight": "Peso",
+  "info.height": "Altura"
 }

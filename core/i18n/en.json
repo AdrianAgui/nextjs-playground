@@ -14,5 +14,12 @@
   "createdby": "Created by",
   "with": "with",
   "nextjs": "NextJS",
-  "close": "Close"
+  "release": "Release",
+  "close": "Close",
+  "info.id": "Identification",
+  "info.trainer": "Trainer",
+  "info.catch": "Catch date",
+  "info.type": "Type",
+  "info.weight": "Weight",
+  "info.height": "Height"
 }

@@ -10,7 +10,7 @@ import { getTeam } from 'core/firebase/teams';
 import { TEAM_LIMIT } from 'core/utils/constants';
 
 function MyTeam() {
-  const { user, setMyTeam } = useGlobalContext();
+  const { user, myTeam, setMyTeam } = useGlobalContext();
   const { translator } = useI18n();
 
   const [team, setTeam] = useState([]);
@@ -32,6 +32,10 @@ function MyTeam() {
       }
     });
   }, [user]);
+
+  useEffect(() => {
+    buildTeam(myTeam);
+  }, [myTeam]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { db } from './init';
-import { collection, getDocs, query, where, addDoc } from '@firebase/firestore';
+import { collection, getDocs, query, where, doc, addDoc, deleteDoc } from '@firebase/firestore';
 
 export const getTeam = async (uid) => {
   const teamsCollection = collection(db, 'teams');
@@ -24,8 +24,19 @@ export const addTeamMate = async (uid, name, pokemon) => {
     userId: uid,
     trainer: name,
     level: 1,
-    catchDate: +new Date()
+    catchDate: +new Date(),
+    type: pokemon.types.map((type) => type.type.name),
+    weight: pokemon.weight / 10,
+    height: pokemon.height / 10
   };
   await addDoc(teamsCollection, poke);
+  return;
+};
+
+export const removeTeamMate = async (id) => {
+  const teamsCollection = collection(db, 'teams');
+  const q = query(teamsCollection, where('id', '==', id));
+  const data = await getDocs(q);
+  await deleteDoc(doc(db, 'teams', data.docs[0].id));
   return;
 };
