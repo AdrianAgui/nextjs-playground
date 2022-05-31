@@ -24,7 +24,7 @@ export const addTeamMate = async (uid, name, pokemon) => {
     userId: uid,
     trainer: name,
     level: 1,
-    catchDate: new Date()
+    catchDate: +new Date()
   };
   await addDoc(teamsCollection, poke);
   return;

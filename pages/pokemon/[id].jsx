@@ -52,8 +52,6 @@ export async function getStaticProps({ params }) {
     image = pokemonInfo.sprites.other['official-artwork'].front_default;
   }
 
-  console.log(pokemonInfo);
-
   const pokemonFetchedSpecie = await fetch(endpointSpecie(id));
   const pokemonSpecie = await pokemonFetchedSpecie.json();
   const { names, flavor_text_entries, genera } = pokemonSpecie;
@@ -64,7 +62,6 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      pokemon: pokemonForm,
       id,
       name,
       names,

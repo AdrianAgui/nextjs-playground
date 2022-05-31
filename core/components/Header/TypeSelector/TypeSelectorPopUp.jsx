@@ -7,9 +7,11 @@ import DropdownArrow from '../../Icons/DropdownArrow';
 import capitalize from 'core/utils/capitalize';
 import useOutsideClick from 'core/hooks/useOutsideClick';
 import TypeSelector from './TypeSelector';
+import { useI18n } from 'core/context/i18nContext';
 
 function TypeSelectorPopUp() {
   const { setPokeType } = useGlobalContext();
+  const { translator } = useI18n();
 
   const [selectedType, setSelectedType] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -38,7 +40,7 @@ function TypeSelectorPopUp() {
                 <span className='ml-2'>{capitalize(selectedType)}</span>
               </div>
             ) : (
-              'Select a type...'
+              translator('type-selector')
             )}
             <DropdownArrow />
           </button>

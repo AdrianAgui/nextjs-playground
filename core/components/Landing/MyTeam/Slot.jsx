@@ -3,7 +3,7 @@ import Image from 'next/image';
 import css from 'styles/MyTeam.module.scss';
 
 import dynamic from 'next/dynamic';
-const MyPokemonModal = dynamic(() => import('../../Modals/MyPokemonModal'));
+const MyPokemonModal = dynamic(() => import('../../MyPokemon/MyPokemonModal'));
 
 function Slot({ pokemon }) {
   const [openModal, setOpenModal] = useState(false);

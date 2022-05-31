@@ -6,11 +6,13 @@
   "previous": "Previous",
   "next": "Next",
   "placeholder.search": "Search pokemons...",
+  "type-selector": "Type...",
   "pokedex.detail": "Detail",
   "pokedex.catch": "Catch!",
   "language.es": "Spanish",
   "language.en": "English",
   "createdby": "Created by",
   "with": "with",
-  "nextjs": "NextJS"
+  "nextjs": "NextJS",
+  "close": "Close"
 }

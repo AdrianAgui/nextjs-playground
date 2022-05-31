@@ -6,11 +6,13 @@
   "previous": "Anterior",
   "next": "Siguiente",
   "placeholder.search": "Buscar pokemons...",
+  "type-selector": "Tipo",
   "pokedex.detail": "Detalle",
   "pokedex.catch": "Captura!",
   "language.es": "Español",
   "language.en": "Inglés",
   "createdby": "Creado por",
   "with": "con",
-  "nextjs": "NextJS"
+  "nextjs": "NextJS",
+  "close": "Cerrar"
 }
