@@ -1,8 +1,10 @@
 import { db } from './init';
-import { collection, getDocs, query, where, doc, addDoc, deleteDoc } from '@firebase/firestore';
+import { collection, query, where, getDocs, doc, addDoc, updateDoc, deleteDoc } from '@firebase/firestore';
+
+const TEAM_COLLECTION = 'teams';
 
 export const getTeam = async (uid) => {
-  const teamsCollection = collection(db, 'teams');
+  const teamsCollection = collection(db, TEAM_COLLECTION);
   const q = query(teamsCollection, where('userId', '==', uid));
   const data = await getDocs(q);
   const team = data.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -15,7 +17,7 @@ export const addTeamMate = async (uid, name, pokemon) => {
     ({ front_default } = pokemon.sprites.other['official-artwork']);
   }
 
-  const teamsCollection = collection(db, 'teams');
+  const teamsCollection = collection(db, TEAM_COLLECTION);
   const poke = {
     id: pokemon.id,
     name: pokemon.name,
@@ -34,9 +36,19 @@ export const addTeamMate = async (uid, name, pokemon) => {
 };
 
 export const removeTeamMate = async (id) => {
-  const teamsCollection = collection(db, 'teams');
+  const teamsCollection = collection(db, TEAM_COLLECTION);
   const q = query(teamsCollection, where('id', '==', id));
   const data = await getDocs(q);
-  await deleteDoc(doc(db, 'teams', data.docs[0].id));
+  const poke = doc(db, TEAM_COLLECTION, data.docs[0].id);
+  await deleteDoc(poke);
+  return;
+};
+
+export const modifyName = async (id, newName) => {
+  const teamsCollection = collection(db, TEAM_COLLECTION);
+  const q = query(teamsCollection, where('id', '==', id));
+  const data = await getDocs(q);
+  const poke = doc(db, TEAM_COLLECTION, data.docs[0].id);
+  await updateDoc(poke, { name: newName });
   return;
 };
