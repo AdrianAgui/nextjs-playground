@@ -36,7 +36,10 @@ export default function PokemonDetail({ ...props }) {
 
         <section className='md:w-1/2 p-8 bg-white rounded-xl'>
           <div className='flex justify-between'>
-            <p className='text-md font-semibold text-gray-900 mb-3'>{props.alias.find((item) => item.language.name === locale).genus}</p>
+            <p className='text-md font-semibold text-gray-900 mb-3'>
+              <span className='font-black mr-2'>#{props.id}</span>
+              <span>{props.alias.find((item) => item.language.name === locale).genus}</span>
+            </p>
             <div className='flex justify-center text-gray-900 mb-3'>
               {props.types.length > 0 &&
                 props.types.map(({ type: { name } }) => {
