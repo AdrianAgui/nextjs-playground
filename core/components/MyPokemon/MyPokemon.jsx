@@ -6,7 +6,7 @@ import TitleEditable from './TitleEditable';
 import LevelProgress from './LevelProgress';
 import InfoTable from './InfoTable';
 
-export default function MyPokemon({ pokemon }) {
+export default function MyPokemon({ pokemon, train }) {
   const [name, setName] = useState(pokemon.name);
   const [hovered, setHovered] = useState(false);
   const { doSound } = useSound(pokemon.id);
@@ -47,7 +47,7 @@ export default function MyPokemon({ pokemon }) {
           </section>
 
           <section className='flex flex-col w-full sm:w-1/2 mt-5'>
-            <LevelProgress currentLevel={pokemon.level} initialExp={pokemon.exp} />
+            <LevelProgress currentLevel={pokemon.level} initialExp={pokemon.exp} train={train} />
             <picture className='p-6 sm:p-12'>
               <Image src={pokemon.imageURL_art} alt={`Image for ${pokemon.name}`} width={240} height={240} layout='responsive'></Image>
             </picture>

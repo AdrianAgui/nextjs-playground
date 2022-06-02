@@ -22,5 +22,6 @@
   "info.type": "Type",
   "info.weight": "Weight",
   "info.height": "Height",
-  "level": "Level"
+  "level": "Level",
+  "train": "Workout"
 }

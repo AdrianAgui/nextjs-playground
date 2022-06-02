@@ -12,6 +12,7 @@ export default function MyPokemonModal({ pokemon, setOpenModal }) {
   const { myTeam, setMyTeam } = useGlobalContext();
   const { translator } = useI18n();
 
+  const [train, doTrain] = useState(0);
   const [closing, setClosing] = useState(false);
 
   const releaseTeamMate = useCallback(() => {
@@ -41,24 +42,37 @@ export default function MyPokemonModal({ pokemon, setOpenModal }) {
             className={`w-full h-screen overflow-auto sm:overflow-hidden md:h-auto md:max-w-2xl flex flex-col justify-between relative bg-white md:rounded-lg rounded-none text-left shadow-xl md:my-32 animate__animated animate__fadeInLeft animate__faster 
             ${closing ? 'animate__animated animate__fadeOutRight animate__faster' : ''}`}
           >
-            <MyPokemon pokemon={pokemon} />
+            <MyPokemon pokemon={pokemon} train={train} />
 
             <div className='flex justify-between p-6 bg-gray-50'>
               <button
                 type='button'
-                className='w-full text-white inline-flex justify-center rounded-md border bg-red-600 border-gray-300 shadow-sm px-4 py-2 mr-3 sm:mr-0 text-base font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
+                className='text-white inline-flex justify-center rounded-md border bg-red-600 border-gray-300 px-4 py-2 font-medium
+                 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3'
                 onClick={releaseTeamMate}
               >
                 {translator('release')}
               </button>
 
-              <button
-                type='button'
-                className='w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
-                onClick={() => closeModal(false)}
-              >
-                {translator('close')}
-              </button>
+              <div className='flex'>
+                <button
+                  type='button'
+                  className='inline-flex justify-center rounded-md border bg-blue-400 border-gray-300 shadow-sm 
+                  px-4 py-2 bg-blue text-base font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3'
+                  onClick={() => doTrain((prev) => prev + 1)}
+                >
+                  {translator('train')}
+                </button>
+
+                <button
+                  type='button'
+                  className='inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 text-base font-medium
+                  text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3'
+                  onClick={() => closeModal(false)}
+                >
+                  {translator('close')}
+                </button>
+              </div>
             </div>
           </div>
         </div>
