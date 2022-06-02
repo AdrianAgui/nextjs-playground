@@ -1,9 +1,13 @@
 import css from 'styles/Pokedex.module.scss';
 
+import useSound from 'core/hooks/useSound';
+
 import Image from 'next/image';
 import Stat from './Stat';
 
 export default function PokedexScreen({ pokemon, loading, error }) {
+  const { doSound } = useSound(pokemon?.id ? pokemon.id : null);
+
   if (error) {
     return (
       <div className={css['pokedex-screen']}>
@@ -26,9 +30,16 @@ export default function PokedexScreen({ pokemon, loading, error }) {
         <div className={css['pokedex-screen']}>
           <div className={css['pokemon-info']}>
             <h2 className={css['pokemon-name']}>
-              {pokemon.name} #{pokemon.id}
+              <span>
+                {pokemon.name} #{pokemon.id}
+              </span>
+              <span onClick={doSound} className='flex justify-end flex-grow cursor-pointer'>
+                🔊
+              </span>
             </h2>
-            <img src={pokemon.sprites.front_default} alt={pokemon.name} className={css['pokedex-img']}></img>
+            <picture className='animate__animated animate__jackInTheBox'>
+              <img src={pokemon.sprites.front_default} alt={pokemon.name} className={css['pokedex-img']}></img>
+            </picture>
             <ul className={css['pokemon-stats']}>{pokemon && pokemon.stats.map((item) => <Stat key={item.stat.name} item={item} />)}</ul>
           </div>
         </div>

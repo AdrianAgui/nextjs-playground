@@ -1,10 +1,13 @@
+import { useRouter } from 'next/router';
+
 import Logo from './Logo';
 import LoginHeader from 'core/components/Header/LoginHeader';
 import Searcher from 'core/components/Header/Searcher';
-import TypeSelector from './TypeSelector/TypeSelector';
 import LangsSelector from './LangsSelector';
 
-import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+
+const TypeSelectorPopUp = dynamic(() => import('./TypeSelector/TypeSelectorPopUp'));
 
 export default function HeaderBar() {
   const router = useRouter();
@@ -16,7 +19,7 @@ export default function HeaderBar() {
 
         <div className='flex items-center mt-8 md:mt-0'>
           <Searcher />
-          {router.pathname.includes('grid') && <TypeSelector />}
+          {router.pathname.includes('grid') && <TypeSelectorPopUp />}
         </div>
 
         <div className='flex items-center mt-8 md:mt-0'>

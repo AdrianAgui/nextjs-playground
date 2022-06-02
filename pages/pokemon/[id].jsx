@@ -1,48 +1,20 @@
 import PageLayout from 'core/components/PageLayout';
-
-import Image from 'next/image';
-import Link from 'next/link';
-import { Heading } from '@chakra-ui/react';
-
-import { TOTAL_POKEMON } from 'core/utils/constants';
 import capitalize from 'core/utils/capitalize';
-import { useRouter } from 'next/router';
 
-const endpoint = (id) => `https://pokeapi.co/api/v2/pokemon/${id}`;
+import PokemonDetail from './../../core/components/Detail/PokemonDetail';
+import { TOTAL_POKEMON } from './../../core/utils/constants';
 
-export default function PokeDetailPage({ idNum, name, front_default, prevId, nextId, hasPrev, hasNext }) {
-  const { locale } = useRouter();
+const locator = 'https://pokeapi.co/api/v2';
 
+const endpointInfo = (id) => `${locator}/pokemon/${id}`;
+const endpointForm = (id) => `${locator}/pokemon-form/${id}`;
+const endpointSpecie = (id) => `${locator}/pokemon-species/${id}`;
+
+export default function PokeDetailPage({ ...data }) {
   return (
-    <PageLayout title={`${idNum} | ${name}`}>
-      <div className='m-3 sm:m-0'>
-        <section className='max-w-md m-auto'>
-          <Heading as='h1' fontSize='40px' align='center'>
-            {name}
-          </Heading>
-
-          <div className='flex justify-center my-8 mx-3 sm:mx-10'>
-            <Image src={front_default} alt={`Image for ${name}`} width={360} height={260} layout='fixed'></Image>
-          </div>
-
-          <div className='flex justify-between font-bold w-50 mx-auto'>
-            <span className='flex justify-start'>
-              {hasPrev && (
-                <Link locale={locale} href={`/pokemon/${prevId}`}>
-                  <a>⏮️ Previous</a>
-                </Link>
-              )}
-            </span>
-
-            <span className='flex justify-end '>
-              {hasNext && (
-                <Link locale={locale} href={`/pokemon/${nextId}`}>
-                  <a>Next ⏭️</a>
-                </Link>
-              )}
-            </span>
-          </div>
-        </section>
+    <PageLayout title={`${data.id} | ${data.name}`}>
+      <div className='p-3 pb-16'>
+        <PokemonDetail {...data} />
       </div>
     </PageLayout>
   );
@@ -68,27 +40,37 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { id } = params;
 
-  const response = await fetch(endpoint(id));
-  const pokemonObj = await response.json();
-  const pokemon = { ...pokemonObj, name: capitalize(pokemonObj.name) };
-
-  const { name } = pokemon;
-  const { idNum, prevId, nextId, hasPrev, hasNext } = pagination(id);
-
-  let { front_default } = pokemon.sprites.other.dream_world;
-  if (!front_default) {
-    ({ front_default } = pokemon.sprites.other['official-artwork']);
+  const pokemonFetched = await fetch(endpointInfo(id));
+  const pokemonObj = await pokemonFetched.json();
+  const pokemonInfo = { ...pokemonObj, name: capitalize(pokemonObj.name) };
+  const {
+    name,
+    sprites: { front_default, back_default }
+  } = pokemonInfo;
+  let image = pokemonInfo.sprites.other.dream_world.front_default;
+  if (!image) {
+    image = pokemonInfo.sprites.other['official-artwork'].front_default;
   }
 
-  return { props: { idNum, name, front_default, prevId, nextId, hasPrev, hasNext } };
-}
+  const pokemonFetchedSpecie = await fetch(endpointSpecie(id));
+  const pokemonSpecie = await pokemonFetchedSpecie.json();
+  const { names, flavor_text_entries, genera } = pokemonSpecie;
 
-function pagination(id) {
+  const pokemonFetchedForm = await fetch(endpointForm(id));
+  const pokemonForm = await pokemonFetchedForm.json();
+  const { types } = pokemonForm;
+
   return {
-    idNum: +id,
-    prevId: +id - 1,
-    nextId: +id + 1,
-    hasPrev: +id - 1 > 0,
-    hasNext: +id + 1 <= TOTAL_POKEMON
+    props: {
+      id,
+      name,
+      names,
+      imageUrl: image,
+      front: front_default,
+      back: back_default,
+      alias: genera,
+      descriptions: flavor_text_entries,
+      types
+    }
   };
 }

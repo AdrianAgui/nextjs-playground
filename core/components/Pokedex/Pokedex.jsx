@@ -13,10 +13,13 @@ import Link from 'next/link';
 import { useToast } from '@chakra-ui/react';
 import capitalize from './../../utils/capitalize';
 import { useRouter } from 'next/router';
+import { useI18n } from 'core/context/i18nContext';
 
 export default function Pokedex() {
   const { user, myTeam } = useGlobalContext();
   const { locale } = useRouter();
+  const { translator } = useI18n();
+
   const toast = useToast();
 
   const [error, setError] = useState(false);
@@ -32,7 +35,7 @@ export default function Pokedex() {
 
   const handleCatch = useCallback(() => {
     if (user && myTeam.length >= 0 && myTeam.length < 6) {
-      addTeamMate(user.uid, pokemon);
+      addTeamMate(user.uid, user.name, pokemon);
       toast({
         title: `${capitalize(pokemon.name)} has been catched!`,
         position: 'bottom-left',
@@ -89,12 +92,12 @@ export default function Pokedex() {
                     className={`flex justify-center items-center mb-1 cursor-pointer ${css['light']} ${css['is-green']} ${css['is-large']}`}
                     onClick={handleCatch}
                   >
-                    Catch!
+                    {translator('pokedex.catch')}
                   </div>
                 )}
                 <div className={`flex justify-center items-center cursor-pointer ${css['light']} ${css['is-orange']} ${css['is-large']}`}>
                   <Link locale={locale} href={`/pokemon/${pokemonId}`}>
-                    <a className='flex items-center'>Detail</a>
+                    <a className='flex items-center'>{translator('pokedex.detail')}</a>
                   </Link>
                 </div>
               </div>
@@ -102,8 +105,8 @@ export default function Pokedex() {
             <PokedexForm pokemonId={pokemonId} setPokemonId={setPokemonId} setLoading={setLoading} />
           </div>
         </div>
-        <div className={css['pokedex-right-front']} />
-        <div className={css['pokedex-right-back']} />
+        <div className={`${css['pokedex-right-front']} hidden md:block`} />
+        <div className={`${css['pokedex-right-back']} hidden md:block`} />
       </div>
     </div>
   );
