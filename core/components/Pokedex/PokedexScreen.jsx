@@ -1,9 +1,13 @@
 import css from 'styles/Pokedex.module.scss';
 
+import useSound from 'core/hooks/useSound';
+
 import Image from 'next/image';
 import Stat from './Stat';
 
 export default function PokedexScreen({ pokemon, loading, error }) {
+  const { doSound } = useSound(pokemon?.id ? pokemon.id : null);
+
   if (error) {
     return (
       <div className={css['pokedex-screen']}>
@@ -29,7 +33,9 @@ export default function PokedexScreen({ pokemon, loading, error }) {
               <span>
                 {pokemon.name} #{pokemon.id}
               </span>
-              <span className='flex justify-end flex-grow cursor-pointer'>🔊</span>
+              <span onClick={doSound} className='flex justify-end flex-grow cursor-pointer'>
+                🔊
+              </span>
             </h2>
             <picture className='animate__animated animate__jackInTheBox'>
               <img src={pokemon.sprites.front_default} alt={pokemon.name} className={css['pokedex-img']}></img>

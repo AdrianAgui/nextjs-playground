@@ -11,6 +11,7 @@ import MyPokemon from './MyPokemon';
 export default function MyPokemonModal({ pokemon, setOpenModal }) {
   const { myTeam, setMyTeam } = useGlobalContext();
   const { translator } = useI18n();
+
   const [closing, setClosing] = useState(false);
 
   const releaseTeamMate = useCallback(() => {

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import useSound from 'core/hooks/useSound';
 
 import Image from 'next/image';
 import TitleEditable from './TitleEditable';
@@ -8,6 +9,7 @@ import InfoTable from './InfoTable';
 export default function MyPokemon({ pokemon }) {
   const [name, setName] = useState(pokemon.name);
   const [hovered, setHovered] = useState(false);
+  const { doSound } = useSound(pokemon.id);
 
   const toggleHover = () => {
     if (hovered) {
@@ -22,6 +24,7 @@ export default function MyPokemon({ pokemon }) {
       <div className='text-center sm:text-left'>
         <div className='flex items-center p-5 bg-gray-100'>
           <picture
+            onClick={doSound}
             className={`rounded-full ring-2 ring-offset-2 ring-opacity-50 ring-black mr-7 cursor-pointer ${
               hovered ? 'animate__animated animate__wobble' : ''
             }`}
@@ -34,6 +37,7 @@ export default function MyPokemon({ pokemon }) {
               onMouseLeave={toggleHover}
             />
           </picture>
+
           <TitleEditable id={pokemon.id} name={name} setName={setName} />
         </div>
 
