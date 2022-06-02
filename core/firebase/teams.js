@@ -26,6 +26,7 @@ export const addTeamMate = async (uid, name, pokemon) => {
     userId: uid,
     trainer: name,
     level: 1,
+    exp: 0,
     catchDate: +new Date(),
     type: pokemon.types.map((type) => type.type.name),
     weight: pokemon.weight / 10,

@@ -18,6 +18,7 @@ export default function useSound(id) {
       setStopper(true);
       const audio = new Audio(soundUrl);
       audio.load();
+      audio.volume = 0.5;
       const audioPromise = audio.play();
       if (audioPromise !== undefined) {
         audioPromise.then(() => setStopper(false)).catch((err) => console.error(err));

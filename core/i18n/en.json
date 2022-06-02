@@ -21,5 +21,6 @@
   "info.catch": "Catch date",
   "info.type": "Type",
   "info.weight": "Weight",
-  "info.height": "Height"
+  "info.height": "Height",
+  "level": "Level"
 }

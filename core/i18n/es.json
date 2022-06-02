@@ -21,5 +21,6 @@
   "info.catch": "Fecha de captura",
   "info.type": "Tipo",
   "info.weight": "Peso",
-  "info.height": "Altura"
+  "info.height": "Altura",
+  "level": "Nivel"
 }

@@ -47,7 +47,7 @@ export default function MyPokemon({ pokemon }) {
           </section>
 
           <section className='flex flex-col w-full sm:w-1/2 mt-5'>
-            <LevelProgress level={pokemon.level} />
+            <LevelProgress currentLevel={pokemon.level} initialExp={pokemon.exp} />
             <picture className='p-6 sm:p-12'>
               <Image src={pokemon.imageURL_art} alt={`Image for ${pokemon.name}`} width={240} height={240} layout='responsive'></Image>
             </picture>
