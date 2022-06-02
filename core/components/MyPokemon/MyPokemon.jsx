@@ -7,16 +7,33 @@ import InfoTable from './InfoTable';
 
 export default function MyPokemon({ pokemon }) {
   const [name, setName] = useState(pokemon.name);
+  const [hovered, setHovered] = useState(false);
+
+  const toggleHover = () => {
+    if (hovered) {
+      setTimeout(() => setHovered(!hovered), 750);
+    } else {
+      setHovered(!hovered);
+    }
+  };
 
   return (
     <div className='bg-white'>
       <div className='text-center sm:text-left'>
         <div className='flex items-center p-5 bg-gray-100'>
-          <img
-            className='bg-white inline-block h-16 w-16 rounded-full ring-2 ring-offset-2 ring-opacity-50 ring-black mr-7'
-            src={pokemon.imageURL}
-            alt={`Image for ${pokemon.name}`}
-          />
+          <picture
+            className={`rounded-full ring-2 ring-offset-2 ring-opacity-50 ring-black mr-7 cursor-pointer ${
+              hovered ? 'animate__animated animate__wobble' : ''
+            }`}
+          >
+            <img
+              className='bg-white inline-block h-16 w-16 rounded-full'
+              src={pokemon.imageURL}
+              alt={`Image for ${pokemon.name}`}
+              onMouseEnter={toggleHover}
+              onMouseLeave={toggleHover}
+            />
+          </picture>
           <TitleEditable id={pokemon.id} name={name} setName={setName} />
         </div>
 

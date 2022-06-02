@@ -13,7 +13,7 @@ const endpointSpecie = (id) => `${locator}/pokemon-species/${id}`;
 export default function PokeDetailPage({ ...data }) {
   return (
     <PageLayout title={`${data.id} | ${data.name}`}>
-      <div className='p-3 pb-24'>
+      <div className='p-3 pb-16'>
         <PokemonDetail {...data} />
       </div>
     </PageLayout>
