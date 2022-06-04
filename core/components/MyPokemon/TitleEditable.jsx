@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { modifyName } from 'core/firebase/teams';
+import { updateName } from 'core/firebase/teams';
 
 import capitalize from 'core/utils/capitalize';
 import Pencil from './../Icons/Pencil';
@@ -13,7 +13,7 @@ export default function TitleEditable({ id, name, setName }) {
     setEditing(false);
     const newName = nameRef.current.value;
     setName(newName);
-    modifyName(id, newName);
+    updateName(id, newName);
   };
 
   useEffect(() => {
