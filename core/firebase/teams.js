@@ -18,11 +18,46 @@ export const addTeamMate = async (uid, name, pokemon) => {
   }
 
   const teamsCollection = collection(db, TEAM_COLLECTION);
-  const poke = {
+  const poke = mapperPokemon(uid, name, pokemon, front_default);
+
+  await addDoc(teamsCollection, poke);
+  return;
+};
+
+export const removeTeamMate = async (id) => {
+  const poke = await getPokemonById(id);
+  await deleteDoc(poke);
+  return;
+};
+
+export const updateName = async (id, newName) => {
+  const poke = await getPokemonById(id);
+  await updateDoc(poke, { name: newName });
+  return;
+};
+
+export const updateLevelAndExp = async (id, currentLevel, currentExp) => {
+  if (currentExp >= 100) currentExp = 0;
+  const poke = await getPokemonById(id);
+  await updateDoc(poke, { level: currentLevel, exp: currentExp });
+  return;
+};
+
+const getPokemonById = async (id) => {
+  const teamsCollection = collection(db, TEAM_COLLECTION);
+  const q = query(teamsCollection, where('id', '==', id));
+  const data = await getDocs(q);
+  if (data.docs.length === 0) return;
+  const poke = doc(db, TEAM_COLLECTION, data.docs[0].id);
+  return poke;
+};
+
+const mapperPokemon = (uid, name, pokemon, picture) => {
+  return {
     id: pokemon.id,
     name: pokemon.name,
     imageURL: pokemon.sprites.front_default,
-    imageURL_art: front_default,
+    imageURL_art: picture,
     userId: uid,
     trainer: name,
     level: 1,
@@ -32,24 +67,4 @@ export const addTeamMate = async (uid, name, pokemon) => {
     weight: pokemon.weight / 10,
     height: pokemon.height / 10
   };
-  await addDoc(teamsCollection, poke);
-  return;
-};
-
-export const removeTeamMate = async (id) => {
-  const teamsCollection = collection(db, TEAM_COLLECTION);
-  const q = query(teamsCollection, where('id', '==', id));
-  const data = await getDocs(q);
-  const poke = doc(db, TEAM_COLLECTION, data.docs[0].id);
-  await deleteDoc(poke);
-  return;
-};
-
-export const modifyName = async (id, newName) => {
-  const teamsCollection = collection(db, TEAM_COLLECTION);
-  const q = query(teamsCollection, where('id', '==', id));
-  const data = await getDocs(q);
-  const poke = doc(db, TEAM_COLLECTION, data.docs[0].id);
-  await updateDoc(poke, { name: newName });
-  return;
 };

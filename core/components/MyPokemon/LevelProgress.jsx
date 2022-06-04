@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Progress } from '@chakra-ui/react';
 import { useI18n } from 'core/context/i18nContext';
+import useLevelUp from 'core/hooks/useLevelUp';
 
-export default function LevelProgress({ currentLevel, initialExp, train }) {
+export default function LevelProgress({ id, currentLevel, initialExp, train }) {
   const { translator } = useI18n();
 
-  const [level, setLevel] = useState(currentLevel);
-  const [exp, setExp] = useState(initialExp);
   const [animating, setAnimating] = useState(false);
 
-  const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+  const { level, exp } = useLevelUp(id, currentLevel, initialExp, train);
 
   useEffect(() => {
     setAnimating(true);
@@ -17,17 +16,6 @@ export default function LevelProgress({ currentLevel, initialExp, train }) {
       setAnimating(false);
     }, 1000);
   }, [level]);
-
-  useEffect(() => {
-    if (exp >= 100) {
-      setLevel(level + 1);
-      setExp(0);
-    }
-  }, [exp]);
-
-  useEffect(() => {
-    if (train !== 0) setExp(exp + randomIntFromInterval(5, 30));
-  }, [train]);
 
   return (
     <section className='px-6'>
