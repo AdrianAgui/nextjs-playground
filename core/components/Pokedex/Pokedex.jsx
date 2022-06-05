@@ -27,10 +27,10 @@ export default function Pokedex() {
   const [pokemon, setPokemon] = useState(null);
 
   const randomId = randomPokemon();
-  const [pokemonId, setPokemonId] = useState(randomId);
+  const [pokemonInput, setPokemonInput] = useState(randomId);
 
   const handleRandom = useCallback(() => {
-    setPokemonId(Math.floor(Math.random() * TOTAL_POKEMON));
+    setPokemonInput(Math.floor(Math.random() * TOTAL_POKEMON));
   });
 
   const handleCatch = useCallback(() => {
@@ -57,7 +57,7 @@ export default function Pokedex() {
 
   useEffect(() => {
     setLoading(true);
-    getApiPokemon(pokemonId)
+    getApiPokemon(pokemonInput)
       .then((pokeData) => {
         setPokemon(pokeData);
         setLoading(false);
@@ -68,7 +68,7 @@ export default function Pokedex() {
         setLoading(false);
         setError(true);
       });
-  }, [pokemonId]);
+  }, [pokemonInput]);
 
   return (
     <div className={css['pokedex-container']}>
@@ -96,13 +96,13 @@ export default function Pokedex() {
                   </div>
                 )}
                 <div className={`flex justify-center items-center cursor-pointer ${css['light']} ${css['is-orange']} ${css['is-large']}`}>
-                  <Link locale={locale} href={`/pokemon/${pokemonId}`}>
+                  <Link locale={locale} href={`/pokemon/${pokemon?.id}`}>
                     <a className='flex items-center'>{translator('pokedex.detail')}</a>
                   </Link>
                 </div>
               </div>
             </div>
-            <PokedexForm pokemonId={pokemonId} setPokemonId={setPokemonId} setLoading={setLoading} />
+            <PokedexForm pokemonId={pokemonInput} setPokemonInput={setPokemonInput} setLoading={setLoading} />
           </div>
         </div>
         <div className={`${css['pokedex-right-front']} hidden md:block`} />
