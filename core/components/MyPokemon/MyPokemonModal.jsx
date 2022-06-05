@@ -20,7 +20,7 @@ export default function MyPokemonModal({ pokemon, setOpenModal }) {
   const releaseTeamMate = useCallback(() => {
     removeTeamMate(pokemon.id);
     closeModal(true);
-  });
+  }, []);
 
   const closeModal = (removed) => {
     setClosing(true);
@@ -34,10 +34,10 @@ export default function MyPokemonModal({ pokemon, setOpenModal }) {
   useOutsideClick(wrapperRef, closeModal);
 
   useEffect(() => {
-    router.beforePopState(() => {
-      setOpenModal(false);
-      router.push('/', { locale: router.locale });
-    });
+    window.onpopstate = () => {
+      closeModal(false);
+      window.history.forward(1);
+    };
   }, []);
 
   return (
@@ -51,7 +51,7 @@ export default function MyPokemonModal({ pokemon, setOpenModal }) {
             className={`w-full h-screen overflow-auto sm:overflow-hidden md:h-auto md:max-w-2xl flex flex-col justify-between relative bg-white md:rounded-lg rounded-none text-left shadow-xl md:my-32 animate__animated animate__fadeInLeft animate__faster 
             ${closing ? 'animate__animated animate__fadeOutRight animate__faster' : ''}`}
           >
-            <MyPokemon pokemon={pokemon} train={train} />
+            <MyPokemon pokemon={pokemon} train={train} closeModal={closeModal} />
 
             <div className='flex justify-between p-6 bg-gray-50'>
               <button
