@@ -1,7 +1,8 @@
 import 'animate.css';
 
-import { useCallback, useState, useRef } from 'react';
+import { useCallback, useState, useRef, useEffect } from 'react';
 import { useI18n } from 'core/context/i18nContext';
+import { useRouter } from 'next/router';
 import { removeTeamMate } from './../../firebase/teams';
 
 import { useGlobalContext } from 'core/context/GlobalContext';
@@ -11,6 +12,7 @@ import MyPokemon from './MyPokemon';
 export default function MyPokemonModal({ pokemon, setOpenModal }) {
   const { myTeam, setMyTeam } = useGlobalContext();
   const { translator } = useI18n();
+  const router = useRouter();
 
   const [train, doTrain] = useState(0);
   const [closing, setClosing] = useState(false);
@@ -30,6 +32,13 @@ export default function MyPokemonModal({ pokemon, setOpenModal }) {
 
   const wrapperRef = useRef(null);
   useOutsideClick(wrapperRef, closeModal);
+
+  useEffect(() => {
+    router.beforePopState(() => {
+      setOpenModal(false);
+      router.push('/', { locale: router.locale });
+    });
+  }, []);
 
   return (
     <div className='relative z-20' aria-labelledby='modal-title' role='dialog' aria-modal='true'>

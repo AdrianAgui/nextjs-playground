@@ -2,15 +2,15 @@ import css from 'styles/Pokedex.module.scss';
 
 import { useState } from 'react';
 
-export default function PokemonForm({ pokemonId, setPokemonId, setLoading }) {
+export default function PokemonForm({ pokemonInput, setPokemonInput, setLoading }) {
   const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (input !== '' && input !== pokemonId) {
+    if (input !== '' && input !== pokemonInput) {
       setLoading(true);
       const id = isNaN(parseInt(input)) ? input.toLowerCase() : input;
-      setPokemonId(id);
+      setPokemonInput(id);
     }
     setInput('');
   };
