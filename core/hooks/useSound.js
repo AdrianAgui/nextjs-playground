@@ -9,7 +9,10 @@ export default function useSound(id) {
     if (id) {
       downloadUrlSound(id)
         .then(setSoundUrl)
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          setSoundUrl(null);
+        });
     }
   }, [id]);
 

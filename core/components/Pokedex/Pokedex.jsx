@@ -105,8 +105,8 @@ export default function Pokedex() {
             <PokedexForm pokemonId={pokemonInput} setPokemonInput={setPokemonInput} setLoading={setLoading} />
           </div>
         </div>
-        <div className={`${css['pokedex-right-front']} hidden md:block`} />
-        <div className={`${css['pokedex-right-back']} hidden md:block`} />
+        <div className={`${css['pokedex-right-front']} hidden lg:block`} />
+        <div className={`${css['pokedex-right-back']} hidden lg:block`} />
       </div>
     </div>
   );

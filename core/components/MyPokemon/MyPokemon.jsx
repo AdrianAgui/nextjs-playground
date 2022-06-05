@@ -6,40 +6,40 @@ import TitleEditable from './TitleEditable';
 import LevelProgress from './LevelProgress';
 import InfoTable from './InfoTable';
 
-export default function MyPokemon({ pokemon, train }) {
+export default function MyPokemon({ pokemon, train, closeModal }) {
   const [name, setName] = useState(pokemon.name);
-  const [hovered, setHovered] = useState(false);
+  const [animate, setAnimate] = useState(false);
 
   const { doSound } = useSound(pokemon.id);
 
-  const toggleHover = () => {
-    if (hovered) {
-      setTimeout(() => setHovered(!hovered), 750);
-    } else {
-      setHovered(!hovered);
-    }
+  const doAction = () => {
+    setAnimate(true);
+    doSound();
+    setTimeout(() => {
+      setAnimate(false);
+    }, 1000);
   };
 
   return (
     <div className='bg-white'>
       <div className='text-center sm:text-left'>
-        <div className='flex items-center p-5 bg-gray-100'>
-          <picture
-            onClick={doSound}
-            className={`rounded-full ring-2 ring-offset-2 ring-opacity-50 ring-black mr-7 cursor-pointer ${
-              hovered ? 'animate__animated animate__wobble' : ''
-            }`}
-          >
-            <img
-              className='bg-white inline-block h-16 w-16 rounded-full'
-              src={pokemon.imageURL}
-              alt={`Image for ${pokemon.name}`}
-              onMouseEnter={toggleHover}
-              onMouseLeave={toggleHover}
-            />
-          </picture>
+        <div className='flex justify-between items-center p-5 bg-gray-100'>
+          <div className='flex'>
+            <picture
+              onClick={doAction}
+              className={`rounded-full ring-2 ring-offset-2 ring-opacity-50 ring-black mr-7 cursor-pointer ${
+                animate ? 'animate__animated animate__wobble' : ''
+              }`}
+            >
+              <img className='bg-white inline-block h-16 w-16 rounded-full' src={pokemon.imageURL} alt={`Image for ${pokemon.name}`} />
+            </picture>
 
-          <TitleEditable id={pokemon.id} name={name} setName={setName} />
+            <TitleEditable id={pokemon.id} name={name} setName={setName} />
+          </div>
+
+          <button type='button' className='mr-3 p-2' onClick={() => closeModal(false)}>
+            <span className='text-3xl font-black text-gray-600 hover:text-gray-800'>&times;</span>
+          </button>
         </div>
 
         <div className='flex flex-col sm:flex-row'>
