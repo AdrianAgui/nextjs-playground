@@ -27,12 +27,16 @@
 
 .pokedex:hover .pokedex-right-front,
 .pokedex.is-active .pokedex-right-front {
-  transform: rotateY(180deg);
+  @media (min-width: 900px) {
+    transform: rotateY(180deg);
+  }
 }
 
 .pokedex:hover .pokedex-right-back,
 .pokedex.is-active .pokedex-right-back {
-  transform: rotateY(0);
+  @media (min-width: 900px) {
+    transform: rotateY(0);
+  }
 }
 
 .pokedex-right-front {
